@@ -26,7 +26,11 @@ static void		putcstr(char const *s, size_t col)
 	set_color(0);
 }
 
-void		ft_printfcolor(const char *format, ...)
+/*
+** ft_printfcolor("%s", "qp", 97); 97 = whito
+*/
+
+void			ft_printfcolor(const char *format, ...)
 {
 	va_list p;
 	char	*tmp;
@@ -40,8 +44,35 @@ void		ft_printfcolor(const char *format, ...)
 				putcstr(va_arg(p, char*), va_arg(p, size_t));
 			else if ((*(format + 1)) == 'd')
 			{
-				putcstr(tmp = ft_itoa(va_arg(p, int)), va_arg(p, size_t));
+				putcstr(tmp = ft_itoa_base(va_arg(p, int), 10), va_arg(p, size_t));
 				ft_memdel((void**)&tmp);
+			}
+			format += 1;
+		}
+		else
+			write(1, format, 1);
+		format += 1;
+	}
+	va_end(p);
+}
+
+void			ft_miniprintf(const char *format, ...)
+{
+	va_list p;
+	char	*str;
+
+	va_start(p, format);
+	while (*format != '\0')
+	{
+		if (*format == '%')
+		{
+			if ((*(format + 1)) == 's')
+				ft_putstr(va_arg(p, char*));
+			else if ((*(format + 1)) == 'd')
+			{
+				str = ft_itoa_base(va_arg(p, int), 10);
+				ft_putstr(str);
+				ft_memdel((void**)&str);
 			}
 			format += 1;
 		}

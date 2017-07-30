@@ -14,6 +14,8 @@
 # define FT_LS_H
 
 # include <dirent.h>
+# include <sys/types.h>
+# include <sys/stat.h>
 # include "minilibft.h"
 
 typedef struct		s_btree

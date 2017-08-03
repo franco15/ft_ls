@@ -37,8 +37,6 @@ void	preparse(t_ls *ls, int ac, char **av)
 {
 	if (ac == 1)
 		get_dir_info(".", ls);
-	else if (ac == 2)
-		get_dir_info(av[1], ls);
 	else
 	{
 		set_opts(ls, av[1]);

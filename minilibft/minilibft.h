@@ -27,5 +27,6 @@ char		*ft_itoa_base(long long int n, int b);
 size_t		ft_strlen(const char *s);
 void		*ft_memalloc(size_t size);
 void		ft_memdel(void **ap);
+void		ft_quicksort(char **s, int start, int end);
 
 #endif

@@ -1,7 +1,7 @@
  /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ls.h                                               :+:      :+:    :+:   */
+/*   ft_ls.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lfranco- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -13,22 +13,22 @@
 #ifndef FT_LS_H
 # define FT_LS_H
 
+# include <stdio.h>
 # include <dirent.h>
 # include <sys/types.h>
 # include <sys/stat.h>
 # include "minilibft.h"
 
-typedef struct		s_btree
-{
-	void			*data;
-	struct s_btree		*lc;
-	struct s_btree		*rc;
-}					t_btree;
-
 /*
 ** ft_ls.c
 */
-void	ft_error(void);
 int 	main(int ac, char **av);
+void	get_dir_info(char *name);
+void	preparse(int ac, char **av);
+
+/*
+** utils.c
+*/
+int		count_files(DIR *dir, char *name);
 
 #endif

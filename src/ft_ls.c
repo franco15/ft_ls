@@ -12,45 +12,37 @@
 
 #include "ft_ls.h"
 
-void	ft_error(void)
-{
-	ft_miniprintf("ded");
-}
-
-void	current(void)
+int		print_ls(char *s)
 {
 
 }
 
-int main(int ac, char **av)
+void	get_dir_info(char *name)
 {
-	DIR *dir;
-	struct dirent *sd;
+	int				i;
+	DIR				*dir;
+	struct dirent	*sd;
 
-	dir = 0;
+	if (!(dir = opendir(name)))
+		return (printf("ded @ tryin to open\n"));
+	i = count_files(dir, name);
+}
+
+void	preparse(int ac, char **av)
+{
 	if (ac == 1)
-	{
-		if (!(dir = opendir(".")))
-		{
-			ft_miniprintf("didnt open directory\n");
-			exit(1);
-		}
-		ft_miniprintf("si lo abrio\n");
-	}
+		get_dir_info(".");
 	else if (ac == 2)
+		get_dir_info(av[1]);
+	else
 	{
-		if (!(dir = opendir(av[1])))
-		{
-			ft_miniprintf("didnt open directory\n");
-			exit(1);
-		}
-		ft_miniprintf("si lo abrio\n");
+		get_opts(av[1]);
+		ls_parse(av);
 	}
-	while ((sd = readdir(dir)) != NULL)
-	{
-		ft_miniprintf("%s\t", sd->d_name);
-	}
-	ft_miniprintf("\n");
-	closedir(dir);
+}
+
+int		main(int ac, char **av)
+{
+	preparse(ac, av);
 	return (0);
 }

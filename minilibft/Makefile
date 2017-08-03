@@ -1,6 +1,6 @@
 NAME = libft.a
 
-SRC = ft_printfcolor.c put.c strings.c conv.c mem.c\
+SRC = ft_printfcolor.c ft_quicksort.c put.c strings.c conv.c mem.c\
 
 OBJ = $(SRC:.c=.o)
 
@@ -17,6 +17,7 @@ clean:
 
 fclean: clean
 	@/bin/rm -f $(NAME)
+	@/bin/rm -f minilibft.h.gch
 	@echo "lib ded"
 
 re: fclean all

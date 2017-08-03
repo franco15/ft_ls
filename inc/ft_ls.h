@@ -19,16 +19,37 @@
 # include <sys/stat.h>
 # include "minilibft.h"
 
+typedef struct	s_options
+{
+	int			l;
+	int			R;
+	int			a;
+	int			r;
+	int			t;
+	int			f;
+	int			u;
+	int			g;
+	int			d;
+}				t_options;
+
+typedef struct	s_ls
+{
+	char		**ar;
+	t_options opts;
+}				t_ls;
+
 /*
 ** ft_ls.c
 */
 int 	main(int ac, char **av);
-void	get_dir_info(char *name);
-void	preparse(int ac, char **av);
+int	get_dir_info(char *name, t_ls *ls);
+void	preparse(t_ls *ls, int ac, char **av);
 
 /*
 ** utils.c
 */
 int		count_files(DIR *dir, char *name);
+void	ls_parse(char **av);
+void	set_opts(t_ls *ls, char *s);
 
 #endif

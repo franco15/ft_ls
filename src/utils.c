@@ -12,25 +12,52 @@
 
 #include "ft_ls.h"
 
-void	ls_parse(char **av)
-{
-	(void)av;
-}
-
-void	set_opts(t_ls *ls, char *s)
-{
-	(void)ls;
-	(void)s;
-}
-
-int		count_files(DIR *dir, char *name)
+int		count_files(char *name)
 {
 	int i;
+	DIR *dir;
 	struct dirent *sd;
 
+	i = 0;
+	dir = opendir(name);
 	while ((sd = readdir(dir)) != NULL)
 		i++;
 	closedir(dir);
-	dir = opendir(name);
 	return (i);
+}
+
+void	ft_pathjoint(char *p, char *n, int nlen)
+{
+	char	tmp[nlen + 2];
+
+	ft_bzero(tmp, nlen + 2);
+	tmp[0] = '/';
+	ft_strcpy(&tmp[1], n);
+	p = ft_realloc(p, nlen, nlen + ft_strlen(p));
+	ft_strcat(p, tmp);
+}
+
+char	*ft_newpath(char *n)
+{
+	char	*ret;
+	char	*tmp;
+
+	tmp = ft_strdup(n);
+	if (!ft_strcmp(".", n))
+		ret = ft_strjoin(tmp, "/");
+	else
+		ret = ft_strjoin("/", tmp);
+	free(tmp);
+	return (ret);
+}
+
+int		is_there_a_dir_or_file_in_av(char **av)
+{
+	int	i;
+
+	i = 0;
+	while (av[++i])
+		if (av[i][0] == '-')
+			return (0);
+	return (i - 1);
 }

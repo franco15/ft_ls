@@ -35,3 +35,34 @@ void	ft_memdel(void **ap)
 		*ap = 0;
 	}
 }
+
+void	ft_bzero(void *s, size_t n)
+{
+	if (n > 0)
+		ft_memset(s, 0, n);
+}
+
+void	*ft_memset(void *b, int c, size_t len)
+{
+	unsigned char	*s;
+
+	s = b;
+	while (len-- > 0)
+		*s++ = c;
+	return (b);
+}
+
+void	*ft_realloc(void *ptr, size_t size, size_t newsize)
+{
+	void	*new;
+
+	if (ptr && newsize && size)
+	{
+		new = ft_memalloc(newsize);
+		new = ft_memcpy(new, ptr, size);
+		free(ptr);
+	}
+	else
+		new = ft_memalloc(newsize);
+	return (new);
+}

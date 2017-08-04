@@ -1,6 +1,7 @@
 NAME = libft.a
 
-SRC = ft_printfcolor.c ft_quicksort.c put.c strings.c conv.c mem.c\
+SRC =	ft_printfcolor.c ft_quicksort.c put.c strings.c strings2.c conv.c mem.c\
+		mem2.c
 
 OBJ = $(SRC:.c=.o)
 

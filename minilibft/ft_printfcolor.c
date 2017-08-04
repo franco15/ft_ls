@@ -74,6 +74,8 @@ void			ft_miniprintf(const char *format, ...)
 				ft_putstr(str);
 				ft_memdel((void**)&str);
 			}
+			else if ((*(format + 1)) == 'c')
+				ft_putchar(va_arg(p, int));
 			format += 1;
 		}
 		else

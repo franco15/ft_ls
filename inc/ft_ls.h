@@ -35,21 +35,36 @@ typedef struct	s_options
 typedef struct	s_ls
 {
 	char		**ar;
+	int			opt;
+	struct stat	stat;
 	t_options opts;
 }				t_ls;
 
 /*
 ** ft_ls.c
 */
-int 	main(int ac, char **av);
-int	get_dir_info(char *name, t_ls *ls);
-void	preparse(t_ls *ls, int ac, char **av);
+int		main(int ac, char **av);
+int		get_dir_info(char *name, t_ls *ls);
+void	ft_ls(int ac, char **av, char *name);
+void	ft_error(char *s);
 
 /*
 ** utils.c
 */
-int		count_files(DIR *dir, char *name);
-void	ls_parse(char **av);
-void	set_opts(t_ls *ls, char *s);
+int		count_files(char *name);
+void	ft_pathjoint(char *p, char *n, int nlen);
+char	*ft_newpath(char *n);
+int		is_there_a_dir_or_file_in_av(char **av);
+
+/*
+** options.c
+*/
+void	set_opts(t_ls *ls, char **s);
+int		skipopts(char **av);
+
+/*
+** parse.c
+*/
+void	parse(char **av, t_ls *ls);
 
 #endif

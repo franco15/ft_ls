@@ -11,7 +11,7 @@ INC_DIR = ./inc/
 LIBFT_DIR = ./minilibft/
 
 # Source files and object files
-SRC_FILES = ft_ls.c utils.c
+SRC_FILES = ft_ls.c utils.c parse.c options.c
 OBJ_FILES = $(SRC_FILES:.c=.o)
 
 # Paths
@@ -35,9 +35,9 @@ $(LIBFT):
 
 # Compiling
 $(NAME): $(OBJ)
-	@echo "(ﾉ◕ヮ◕)ﾉ*:・ﾟ✧ Compiling... Wait a sec."
+	@echo "(ﾉ◕ヮ◕)ﾉ*:・ﾟ✧ Compiling... Aguanta"
 	@gcc $(OBJ) $(LNK) -lm -o $(NAME)
-	@echo "(•̀ᴗ•́)و $(NAME) Kewl!".
+	@echo "(•̀ᴗ•́)و $(NAME) Kewl!"
 
 # clean rule
 clean:

@@ -55,9 +55,10 @@ int		is_there_a_dir_or_file_in_av(char **av)
 {
 	int	i;
 
-	i = 0;
-	while (av[++i])
-		if (av[i][0] == '-')
-			return (0);
-	return (i - 1);
+	i = 1;
+	while (av[i] && av[i] && (av[i][0] == '-'))
+			i++;
+	if (av[i] && av[i][0] != '-')
+		return (i);
+	return (0);
 }

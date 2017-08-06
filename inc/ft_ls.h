@@ -34,8 +34,9 @@ typedef struct	s_options
 
 typedef struct	s_ls
 {
-	char		**ar;
 	int			opt;
+	char		*path;
+	char		**ar;
 	struct stat	stat;
 	t_options opts;
 }				t_ls;
@@ -44,7 +45,6 @@ typedef struct	s_ls
 ** ft_ls.c
 */
 int		main(int ac, char **av);
-int		get_dir_info(char *name, t_ls *ls);
 void	ft_ls(int ac, char **av, char *name);
 void	ft_error(char *s);
 
@@ -65,6 +65,12 @@ int		skipopts(char **av);
 /*
 ** parse.c
 */
-void	parse(char **av, t_ls *ls);
+void	parse_ls(int ac,char **av, t_ls *ls, char *name);
+// int		get_dir_info(char *name, t_ls *ls);
+
+/*
+** sort.c
+*/
+void	sort_ls(t_ls *ls);
 
 #endif

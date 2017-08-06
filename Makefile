@@ -11,7 +11,7 @@ INC_DIR = ./inc/
 LIBFT_DIR = ./minilibft/
 
 # Source files and object files
-SRC_FILES = ft_ls.c utils.c parse.c options.c
+SRC_FILES = ft_ls.c utils.c parse.c options.c sort.c
 OBJ_FILES = $(SRC_FILES:.c=.o)
 
 # Paths

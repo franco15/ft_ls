@@ -23,25 +23,6 @@ void		print_ls(char *s)
 	(void)s;
 }
 
-int	get_dir_info(char *name, t_ls *ls)
-{
-	int				i;
-	DIR				*dir;
-	struct dirent	*sd;
-
-	if (!(dir = opendir(name)))
-		return (printf("ded @ tryin to open\n"));
-	// printf("get_dir_info\n");
-	i = count_files(name);
-	ls->ar = (char**)ft_memalloc(sizeof(char*) * (i + 1));
-	ls->ar[i] = 0;
-	i = 0;
-	while ((sd = readdir(dir)) != NULL)
-		ls->ar[i++] = ft_strdup(sd->d_name);
-	closedir(dir);
-	return (0);
-}
-
 void	ft_ls(int ac, char **av, char *name)
 {
 	t_ls		*ls;
@@ -51,14 +32,17 @@ void	ft_ls(int ac, char **av, char *name)
 	!path ? (path = ft_newpath(name)) : ft_pathjoint(path, name, ft_strlen(name));
 	// printf("path: %s\n", path);
 	ls = (t_ls*)ft_memalloc(sizeof(t_ls));
-	if (ac == 1)
-		get_dir_info(name, ls);
-	else
-	{
-		set_opts(ls, av);
-		// printf("opts kewl\n");
-		parse(av, ls);
-	}
+	ls->path = ft_strdup(path);
+	parse_ls(ac, av, ls, name);
+	sort_ls(ls);
+	// if (ac == 1)
+	// 	get_dir_info(name, ls);
+	// else
+	// {
+	// 	set_opts(ls, av);
+	// 	// printf("opts kewl\n");
+	// 	parse(av, ls);
+	// }
 }
 
 int		main(int ac, char **av)
@@ -74,7 +58,7 @@ int		main(int ac, char **av)
 		i = is_there_a_dir_or_file_in_av(av);
 		i == 0 ? (name = ft_strdup(".")) : (name = ft_strdup(av[i]));
 	}
-	// printf("name: %s\n", name);
+	printf("name: %s\n", name);
 	ft_ls(ac, av, name);
 	return (0);
 }

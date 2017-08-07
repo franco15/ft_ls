@@ -12,6 +12,10 @@
 
 #include "ft_ls.h"
 
+/*
+** c f t u v S U X
+*/
+
 void	sort_ls(t_ls *ls)
 {
 	int	i;

@@ -18,9 +18,14 @@ void	ft_error(char *s)
 	exit(1);
 }
 
-void		print_ls(char *s)
+static void		print_ls(t_ls *ls)
 {
-	(void)s;
+	int		i;
+
+	i = 0;
+	while (ls->ar[i])
+		printf("%s ", ls->ar[i++]);
+	printf("\n");
 }
 
 void	ft_ls(int ac, char **av, char *name)
@@ -35,6 +40,7 @@ void	ft_ls(int ac, char **av, char *name)
 	ls->path = ft_strdup(path);
 	parse_ls(ac, av, ls, name);
 	sort_ls(ls);
+	print_ls(ls);
 	// if (ac == 1)
 	// 	get_dir_info(name, ls);
 	// else

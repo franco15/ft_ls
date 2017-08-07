@@ -21,29 +21,26 @@ void	ft_swap(char **s1, char **s2)
 	*s2 = s3;
 }
 
-int		partition(char **s, int start, int end, int (*comp)(char *, char *))
+void	ft_quicksort(char **s, int start, int end, int (comp)(char *, char *))
 {
 	int		i;
-	int		pi;
+	int		j;
 	char	*pivot;
-
-	i = 0;
-	pi = start;
-	pivot = ar[end];
-	while (i < (end - start))
-	{
-		if (comp(s[i], pivot))
-			ft_swap(&s[i], &ar[pi++]);
-	}
-	ft_swap(&ar[pi], ar[end]);
-	return (pi);
-}
-
-void	ft_quicksort(char **s, int start, int end, int (*comp)(char *, char *))
-{
-	int	pi;
 
 	if (start >= end)
 		return ;
-	pi = partition(&s, start, end, comp);
+	i = start;
+	j = end;
+	pivot = s[(start + end) / 2];
+	while (i <= j)
+	{
+		while (comp(s[i], pivot) < 0)
+			i++;
+		while (comp(s[j], pivot) > 0)
+			j--;
+		if (i <= j)
+			ft_swap(&s[i++], &s[j--]);
+	}
+	ft_quicksort(s, start, j, comp);
+	ft_quicksort(s, i, end, comp);
 }

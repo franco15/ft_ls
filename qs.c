@@ -30,17 +30,37 @@ int		partition(char **s, int start, int end, int (comp)(char *, char *))
 	int		i;
 	int		pi;
 	char	*pivot;
+	int j;
 
 	i = 0;
 	pi = start;
 	pivot = s[(start + end) / 2];
 	while (i < (end - start))
 	{
-		if (comp(s[i], pivot))
+		printf("comparing s[i = %d]: %s & pivot: %s\n", i, s[i], pivot);
+		if (comp(s[i], pivot) <= 0)
+		{
+			printf("s[i = %d]: %s <= pivot: %s\n\n", i, s[i], pivot);
+			printf("swap 1\n");
+			printf("swaping s[i = %d]: %s & s[pi = %d]: %s\n", i, s[i], pi, s[pi]);
 			ft_swap(&s[i], &s[pi++]);
+			j = 0;
+			while (s[j])
+				printf("%s | ", s[j++]);
+			printf("\n\n");
+		}
+		else
+			printf("s[i = %d]: %s > pivot: %s\n\n", i, s[i], pivot);
 		i++;
 	}
+	printf("i = %d !< (end = %d - start = %d)\n", i, end, start);
+	printf("swap 2\n");
+	printf("swaping s[pi = %d]: %s & s[end = %d]: %s\n", pi, s[pi], end, s[end]);
 	ft_swap(&s[pi], &s[end]);
+	j = 0;
+	while (s[j])
+		printf("%s | ", s[j++]);
+	printf("\n\n");
 	return (pi);
 }
 
@@ -68,9 +88,15 @@ int main(int ac, char **av)
 	qs[2] = av[3];
 	qs[3] = av[4];
 	qs[4] = av[5];
+	printf("\nb4 qs\n");
+	while (qs[i])
+		printf("%s | ", qs[i++]);
+	printf("\n\n");
 	ft_quicksort(qs, 0, 4, ft_strcmp);
 	i = 0;
+	printf("after qs\n");
 	while (qs[i])
-		printf("%s\n", qs[i++]);
+		printf("%s | ", qs[i++]);
+	printf("\n\n");
 	return (0);
 }

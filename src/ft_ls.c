@@ -18,16 +18,6 @@ void	ft_error(char *s)
 	exit(1);
 }
 
-static void		print_ls(t_ls *ls)
-{
-	int		i;
-
-	i = 0;
-	while (ls->ar[i])
-		printf("%s ", ls->ar[i++]);
-	printf("\n");
-}
-
 void	ft_ls(int ac, char **av, char *name)
 {
 	t_ls		*ls;

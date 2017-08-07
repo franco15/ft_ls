@@ -37,6 +37,7 @@ typedef struct	s_ls
 	int			opt;
 	char		*path;
 	char		**ar;
+	char		**p;
 	struct stat	stat;
 	t_options opts;
 }				t_ls;
@@ -72,5 +73,10 @@ void	parse_ls(int ac,char **av, t_ls *ls, char *name);
 ** sort.c
 */
 void	sort_ls(t_ls *ls);
+
+/*
+** print.c
+*/
+void	print_ls(t_ls *ls);
 
 #endif

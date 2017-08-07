@@ -29,6 +29,7 @@ void	*ft_memalloc(size_t size);
 void	ft_memdel(void **ap);
 void	ft_quicksort(char **s, int start, int end,
 		int (*comp)(const char *, const char *));
+void	ft_swap(char **s1, char **s2);
 char	*ft_strdup(const char *s1);
 char	*ft_strcpy(char *dst, const	char *src);
 int		ft_strcmp(const char *s1, const char *s2);
@@ -39,5 +40,7 @@ void	*ft_memset(void *b, int c, size_t len);
 void	*ft_memcpy(void *dst, const void *src, size_t n);
 void	*ft_realloc(void *ptr, size_t size, size_t newsize);
 size_t	ft_arrlen(char **s);
+void	ft_arrrev(char **s);
+void	ft_putarr(char **s);
 
 #endif

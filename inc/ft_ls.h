@@ -23,8 +23,9 @@ typedef struct	s_options
 {
 	int			l;
 	int			R;
-	int			a;
 	int			r;
+	int			A;
+	int			a;
 	int			t;
 	int			f;
 	int			u;

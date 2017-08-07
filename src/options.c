@@ -25,7 +25,7 @@ int	skipopts(char **av)
 static void	ft_usage(char option)
 {
 	ft_miniprintf("ls: illegal option -- %c\n", option);
-	ft_miniprintf("usage: ls [-Radfglrtu] [file ...]\n");
+	ft_miniprintf("usage: ls [-ARadfglrtu] [file ...]\n");
 	exit(1);
 }
 
@@ -35,7 +35,7 @@ static int	valid_opt(char *s)
 	char	*options;
 
 	i = 0;
-	options = "lRartfugd";
+	options = "lRartfugdA";
 	while (options[i])
 		if (*s == options[i++])
 			return (1);
@@ -65,8 +65,8 @@ void		set_opts(t_ls *ls, char **s)
 				s[i][j] == 't' ? (ls->opts.t = 1) : (ls->opts.f = 1);
 			else if (s[i][j] == 'u' || s[i][j] == 'g')
 				s[i][j] == 'u' ? (ls->opts.u = 1) : (ls->opts.g = 1);
-			else if (s[i][j] == 'd')
-				ls->opts.d = 1;
+			else if (s[i][j] == 'd' || s[i][j] == 'A')
+				s[i][j] == 'd' ? (ls->opts.d = 1) : (ls->opts.A = 1);
 		}
 	}
 }

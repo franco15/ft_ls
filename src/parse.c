@@ -25,7 +25,14 @@ static int		get_dir_info(char *name, t_ls *ls)
 	ls->ar[i] = 0;
 	i = 0;
 	while ((sd = readdir(dir)) != NULL)
+	{
+		if (!ls->opt && (!ls->opts.a || !ls->opts.A) && sd->d_name[0] == '.')
+			continue ;
+		if (ls->opt && ls->opts.A && !ls->opts.a && (!ft_strcmp(sd->d_name, ".")
+			|| !ft_strcmp(sd->d_name, "..")))
+			continue ;
 		ls->ar[i++] = ft_strdup(sd->d_name);
+	}
 	closedir(dir);
 	return (0);
 }

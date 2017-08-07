@@ -12,46 +12,29 @@
 
 #include "ft_ls.h"
 
-static void	remove_dot_files(t_ls *ls)
+static void	print_l_fmt(t_ls *ls)
 {
-	int	i;
-	int	j;
-
-	i = 0;
-	j = 0;
-	while (ls->ar[i])
-		if (ls->ar[i++][0] == '.')
-			j++;
-	ls->p = (char**)ft_memalloc(sizeof(char*) * (i - j) + 1);
-	ls->p[i - j] = 0;
-	i = 0;
-	j = 0;
-	while (ls->ar[j])
-	{
-		if (ls->ar[j][0] != '.')
-			ls->p[i++] = ft_strdup(ls->ar[j]);
-		j++;
-	}
+	(void)ls;
 }
 
-// static void	opt_R(t_ls *ls)
-// {
-// 	int	i;
-//
-// 	i = 0;
-// 	ls->opt && ls->opts.a ? ft_putarr(ls->ar) : ft_putarr(ls->p);
-// 	while(ls->)
-// }
+static void	returning_back(t_ls *ls)
+{
+	int		i;
+	(void)	ls;
+
+	i = 0;
+	ft_miniprintf("--------RETURNING BACK 998 PUTOS AND ONE PUTOTE--------\n");
+	while (i++ < 998)
+		ft_miniprintf("PUTO\n");
+	ft_miniprintf("PUTOTE");
+}
 
 void		print_ls(t_ls *ls)
 {
-	int		i;
-
-	i = 0;
-	remove_dot_files(ls);
-	if (ls->opt && ls->opts.a)
-		ft_putarr(ls->ar);
+	if (ls->opt && ls->opts.l)
+		print_l_fmt(ls);
 	else
-		ft_putarr(ls->p);
-	printf("\n");
+		ft_putarr(ls->ar);
+	if (ls->opt && ls->opts.R)
+		returning_back(ls);
 }

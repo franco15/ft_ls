@@ -14,6 +14,9 @@
 
 void	sort_ls(t_ls *ls)
 {
-	if (ls->opt && ls->opts.f)
-		return ;
+	int	i;
+	i = ft_arrlen(ls->ar);
+	ft_quicksort(ls->ar, 0, i - 1, ft_strcmp);
+	// if (ls->opt && ls->opts.f)
+	// 	return ;
 }

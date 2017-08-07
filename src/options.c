@@ -49,7 +49,6 @@ void		set_opts(t_ls *ls, char **s)
 	int		j;
 
 	i = 0;
-	// printf("optios\n");
 	while (s[++i] && s[i][0] == '-')
 	{
 		if (!ft_strcmp("-", s[i]))

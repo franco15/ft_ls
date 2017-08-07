@@ -33,22 +33,12 @@ void	ft_ls(int ac, char **av, char *name)
 	t_ls		*ls;
 	static char	*path;
 
-	// printf("fT_ls\n");
 	!path ? (path = ft_newpath(name)) : ft_pathjoint(path, name, ft_strlen(name));
-	// printf("path: %s\n", path);
 	ls = (t_ls*)ft_memalloc(sizeof(t_ls));
 	ls->path = ft_strdup(path);
 	parse_ls(ac, av, ls, name);
 	sort_ls(ls);
 	print_ls(ls);
-	// if (ac == 1)
-	// 	get_dir_info(name, ls);
-	// else
-	// {
-	// 	set_opts(ls, av);
-	// 	// printf("opts kewl\n");
-	// 	parse(av, ls);
-	// }
 }
 
 int		main(int ac, char **av)
@@ -64,7 +54,6 @@ int		main(int ac, char **av)
 		i = is_there_a_dir_or_file_in_av(av);
 		i == 0 ? (name = ft_strdup(".")) : (name = ft_strdup(av[i]));
 	}
-	printf("name: %s\n", name);
 	ft_ls(ac, av, name);
 	return (0);
 }

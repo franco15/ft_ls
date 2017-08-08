@@ -12,30 +12,6 @@
 
 #include "ft_ls.h"
 
-void		get_stat(t_ls *ls)
-{
-	int			i;
-	char		*t_path;
-	t_list		*tmp;
-	struct stat	st;
-
-	i = ls->size_of_arr;
-	while (--i >= 0)
-	{
-		t_path = ft_strdup(ls->path);
-		ft_pathjoint(&t_path, ls->ar[i], ft_strlen(ls->ar[i]));
-		lstat(t_path, &st);
-		// if (S_ISDIR(st.st_mode))
-		// 	printf("smn es dir: %s\n", ls->ar[i]);
-		tmp = ft_lstnew(&st.st_mode, sizeof(st));
-		// tmp->content = (struct stat*)ft_memalloc(sizeof(struct stat));
-		// tmp->content = stat;
-		ft_lstadd(&ls->stat, tmp);
-		// printf("ls->stat->content address = %p\n", &ls->stat->content);
-	}
-	ft_strdel(&t_path);
-}
-
 static void	get_dir_info(char *name, t_ls *ls)
 {
 	int				i;
@@ -43,7 +19,7 @@ static void	get_dir_info(char *name, t_ls *ls)
 	struct dirent	*sd;
 
 	if (!(dir = opendir(name)))
-		return ((void)ft_miniprintf("ls: name: No such file or directory\n"));
+		return ((void)ft_miniprintf("ls: %s: No such file or directory\n", name));
 	i = count_files(name);
 	ls->ar = (char**)ft_memalloc(sizeof(char*) * (i + 1));
 	ls->ar[i] = 0;

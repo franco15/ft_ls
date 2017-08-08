@@ -17,7 +17,9 @@ void	ft_ls(int ac, char **av, char *name)
 	t_ls				*ls;
 	static char			*path;
 
-	!path ? (path = ft_newpath(name)) : ft_pathjoint(&path, name, ft_strlen(name));
+	// printf("name: %s\n", name);
+	!path ? (path = ft_newpath(name)) : ft_pathjoint(&path, name);
+	// printf("path in ls: %s\n", path);
 	ls = (t_ls*)ft_memalloc(sizeof(t_ls));
 	ls->path = ft_strdup(path);
 	parse_ls(ac, av, ls, name);

@@ -26,15 +26,16 @@ int		count_files(char *name)
 	return (i);
 }
 
-void	ft_pathjoint(char **p, char *n, int nlen)
+void	ft_pathjoint(char **p, char *name)
 {
-	char	tmp[nlen + 2];
+	char	*tmp;
+	// char	*tmp2;
 
-	ft_bzero(tmp, nlen + 2);
-	tmp[0] = '/';
-	ft_strcpy(&tmp[1], n);
-	*p = ft_realloc((void**)p, nlen, nlen + ft_strlen(*p));
-	ft_strcat(*p, tmp);
+	tmp = ft_strjoin(*p, name);
+	// tmp2 = ft_strjoin(tmp, name);
+	// free(tmp);
+	free(*p);
+	*p = tmp;
 }
 
 char	*ft_newpath(char *n)
@@ -46,7 +47,7 @@ char	*ft_newpath(char *n)
 	if (!ft_strcmp(".", n))
 		ret = ft_strjoin(tmp, "/");
 	else
-		ret = ft_strjoin("/", tmp);
+		ret = ft_strjoin("./", tmp);
 	free(tmp);
 	return (ret);
 }

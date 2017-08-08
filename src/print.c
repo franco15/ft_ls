@@ -15,28 +15,36 @@
 static void	returning_back(t_ls *ls)
 {
 	(void)ls;
-	int	i;
-	t_list	*stat;
-	mode_t	mode;
+	int			i;
+	char		*t_path;
+	struct stat	st;
 
-	i = 0;
-	stat = ls->stat;
-	while (ls->ar[i++])
+	i = -1;
+	while (ls->ar[++i])
 	{
-		// printf("stat address: %p\n", &stat->content);
-		mode = (unsigned short)stat->content;
-		if (S_ISDIR(mode))
+		// printf("%s\n", ls->ar[i]);
+		// printf("path: %s\n", ls->path);
+		t_path = ft_strdup(ls->path);
+		ft_pathjoint(&t_path, ls->ar[i]);
+		// printf("t_path: %s\n", t_path);
+		lstat(t_path, &st);
+		if (S_ISDIR(st.st_mode) && !(ft_strcmp(ls->ar[i], ".") == 0 ||
+			ft_strcmp(ls->ar[i], "..") == 0))
 		{
-			printf("./%s\n", ls->ar[i++]);
-			// ft_ls(1, , filename);
+			// printf("ssad\n");
+			printf("%s\n", t_path);
+			ft_ls(1, &ls->ar[i], ls->ar[i]);
+			printf("\n");
 		}
-		stat = stat->next;
+		else
+			printf("error: %s\n", strerror(errno));
+		free(t_path);
 	}
 }
 
 void		print_ls(t_ls *ls)
 {
-	get_stat(ls);
+	// get_stat(ls);
 	if (ls->opt && ls->opts.l)
 		l_format(ls);
 	else

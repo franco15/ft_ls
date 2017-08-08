@@ -80,4 +80,9 @@ void	sort_ls(t_ls *ls);
 */
 void	print_ls(t_ls *ls);
 
+/*
+** l_format.c
+*/
+void	l_format(t_ls *ls);
+
 #endif

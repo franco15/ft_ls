@@ -12,7 +12,12 @@
 
 #include "ft_ls.h"
 
-static int		get_dir_info(char *name, t_ls *ls)
+// static void	create_file(t_ls *ls, struct dirent *sd)
+// {
+//
+// }
+
+static int	get_dir_info(char *name, t_ls *ls)
 {
 	int				i;
 	DIR				*dir;
@@ -26,11 +31,13 @@ static int		get_dir_info(char *name, t_ls *ls)
 	i = 0;
 	while ((sd = readdir(dir)) != NULL)
 	{
-		if (!ls->opt && (!ls->opts.a || !ls->opts.A) && sd->d_name[0] == '.')
+		if ((ls->opt && (!ls->opts.a && !ls->opts.A) && sd->d_name[0] == '.') ||
+			(!ls->opt && sd->d_name[0] == '.'))
 			continue ;
 		if (ls->opt && ls->opts.A && !ls->opts.a && (!ft_strcmp(sd->d_name, ".")
 			|| !ft_strcmp(sd->d_name, "..")))
 			continue ;
+		// create_file(ls, sd);
 		ls->ar[i++] = ft_strdup(sd->d_name);
 	}
 	closedir(dir);

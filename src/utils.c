@@ -26,15 +26,15 @@ int		count_files(char *name)
 	return (i);
 }
 
-void	ft_pathjoint(char *p, char *n, int nlen)
+void	ft_pathjoint(char **p, char *n, int nlen)
 {
 	char	tmp[nlen + 2];
 
 	ft_bzero(tmp, nlen + 2);
 	tmp[0] = '/';
 	ft_strcpy(&tmp[1], n);
-	p = ft_realloc(p, nlen, nlen + ft_strlen(p));
-	ft_strcat(p, tmp);
+	*p = ft_realloc((void**)p, nlen, nlen + ft_strlen(*p));
+	ft_strcat(*p, tmp);
 }
 
 char	*ft_newpath(char *n)

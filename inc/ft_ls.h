@@ -14,6 +14,7 @@
 # define FT_LS_H
 
 # include <stdio.h>
+# include <errno.h>
 # include <dirent.h>
 # include <sys/types.h>
 # include <sys/stat.h>
@@ -33,14 +34,24 @@ typedef struct	s_options
 	int			d;
 }				t_options;
 
+// typedef struct			s_stat_list
+// {
+// 	struct stat			st;
+// 	struct stat_list	next;
+// }						t_stat_list;
+
 typedef struct	s_ls
 {
 	int			opt;
+	int			size_of_arr;
+	char		*mode;
+	char		*time;
+	char		*file;
 	char		*path;
 	char		**ar;
-	char		**p;
-	struct stat	stat;
-	t_options opts;
+	t_list		*stat;
+	// struct stat	stat;
+	t_options	opts;
 }				t_ls;
 
 /*
@@ -48,13 +59,12 @@ typedef struct	s_ls
 */
 int		main(int ac, char **av);
 void	ft_ls(int ac, char **av, char *name);
-void	ft_error(char *s);
 
 /*
 ** utils.c
 */
 int		count_files(char *name);
-void	ft_pathjoint(char *p, char *n, int nlen);
+void	ft_pathjoint(char **p, char *n, int nlen);
 char	*ft_newpath(char *n);
 int		is_there_a_dir_or_file_in_av(char **av);
 
@@ -68,7 +78,8 @@ int		skipopts(char **av);
 ** parse.c
 */
 void	parse_ls(int ac,char **av, t_ls *ls, char *name);
-// int		get_dir_info(char *name, t_ls *ls);
+void	get_stat(t_ls *ls);
+ // int		get_dir_info(char *name, t_ls *ls);
 
 /*
 ** sort.c

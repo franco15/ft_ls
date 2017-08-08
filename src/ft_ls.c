@@ -12,18 +12,12 @@
 
 #include "ft_ls.h"
 
-void	ft_error(char *s)
-{
-	ft_miniprintf("%s\n", s);
-	exit(1);
-}
-
 void	ft_ls(int ac, char **av, char *name)
 {
-	t_ls		*ls;
-	static char	*path;
+	t_ls				*ls;
+	static char			*path;
 
-	!path ? (path = ft_newpath(name)) : ft_pathjoint(path, name, ft_strlen(name));
+	!path ? (path = ft_newpath(name)) : ft_pathjoint(&path, name, ft_strlen(name));
 	ls = (t_ls*)ft_memalloc(sizeof(t_ls));
 	ls->path = ft_strdup(path);
 	parse_ls(ac, av, ls, name);

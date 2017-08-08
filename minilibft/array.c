@@ -13,16 +13,6 @@
 #include "minilibft.h"
 #include "stdio.h"
 
-size_t		ft_arrlen(char **s)
-{
-	int	i;
-
-	i = 0;
-	while (s[i])
-		i++;
-	return (i);
-}
-
 void	ft_arrrev(char **s)
 {
 	int		i;
@@ -43,4 +33,14 @@ void	ft_putarr(char **s)
 	while (s[i])
 		ft_miniprintf("%s ", s[i++]);
 	ft_miniprintf("\n");
+}
+
+size_t		ft_arrlen(char **s)
+{
+	int	i;
+
+	i = 0;
+	while (s[i])
+		i++;
+	return (i);
 }

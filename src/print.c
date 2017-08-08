@@ -15,21 +15,28 @@
 static void	returning_back(t_ls *ls)
 {
 	(void)ls;
-	// int	i;
-	//
-	// i = 0;
-	// while (files)
-	// {
-	// 	if (isdir(file))
-	// 	{
-	// 		printf("filename");
-	// 		ft_ls(ac,av, filename);
-	// 	}
-	// }
+	int	i;
+	t_list	*stat;
+	mode_t	mode;
+
+	i = 0;
+	stat = ls->stat;
+	while (ls->ar[i++])
+	{
+		// printf("stat address: %p\n", &stat->content);
+		mode = (unsigned short)stat->content;
+		if (S_ISDIR(mode))
+		{
+			printf("./%s\n", ls->ar[i++]);
+			// ft_ls(1, , filename);
+		}
+		stat = stat->next;
+	}
 }
 
 void		print_ls(t_ls *ls)
 {
+	get_stat(ls);
 	if (ls->opt && ls->opts.l)
 		l_format(ls);
 	else

@@ -23,10 +23,12 @@ void	sort_ls(t_ls *ls)
 	i = ft_arrlen(ls->ar);
 	if (ls->opt && ls->opts.f)
 		return ;
-	// if (ls->opt && ls->opts.t)
-	// 	ft_quicksort(ls->ar, 0, i - 1, ft_timesort_t_);
-	// else if (ls->opt && ls->opts.u)
-		// ft_quicksort(ls->ar, 0, i - 1, ft_timesort_u_);
+	// if (ls->opt && (ls->opts.t || ls->opts.u))
+	// {
+	// 	get_time(ls);
+	// 	ls->opts.t ? ft_quicksort(ls->ar, 0, i - 1, ft_timesort_t_) :
+	// 	ft_quicksort(ls->ar, 0, i - 1, ft_timesort_u_);
+	// }
 	ft_quicksort(ls->ar, 0, i - 1, ft_strcmp);
 	if (ls->opt && ls->opts.r)
 		ft_arrrev(ls->ar);

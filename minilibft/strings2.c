@@ -47,3 +47,9 @@ char	*ft_strcat(char *s1, const char *s2)
 	s1[i] = '\0';
 	return (s1);
 }
+
+void	ft_strdel(char **as)
+{
+	if (as)
+		ft_memdel((void**)as);
+}

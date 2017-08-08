@@ -52,15 +52,15 @@ void	*ft_memset(void *b, int c, size_t len)
 	return (b);
 }
 
-void	*ft_realloc(void *ptr, size_t size, size_t newsize)
+void	*ft_realloc(void **ptr, size_t size, size_t newsize)
 {
 	void	*new;
 
-	if (ptr && newsize && size)
+	if (*ptr && newsize && size)
 	{
 		new = ft_memalloc(newsize);
-		new = ft_memcpy(new, ptr, size);
-		free(ptr);
+		new = ft_memcpy(new, *ptr, size);
+		free(*ptr);
 	}
 	else
 		new = ft_memalloc(newsize);

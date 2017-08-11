@@ -16,11 +16,11 @@
 ** c f t u v S U X
 */
 
-void	sort_ls(t_ls *ls)
+void	sort_ls(t_ls *ls, char **arr)
 {
 	int	i;
 
-	i = ft_arrlen(ls->ar);
+	i = ft_arrlen(arr);
 	if (ls->opt && ls->opts.f)
 		return ;
 	// if (ls->opt && (ls->opts.t || ls->opts.u))
@@ -29,9 +29,9 @@ void	sort_ls(t_ls *ls)
 	// 	ls->opts.t ? ft_quicksort(ls->ar, 0, i - 1, ft_timesort_t_) :
 	// 	ft_quicksort(ls->ar, 0, i - 1, ft_timesort_u_);
 	// }
-	ft_quicksort(ls->ar, 0, i - 1, ft_strcmp);
+	ft_quicksort(arr, 0, i - 1, ft_strcmp);
 	if (ls->opt && ls->opts.r)
-		ft_arrrev(ls->ar);
+		ft_arrrev(arr);
 	// i = 0;
 	// while (ls->ar[i])
 	// 	printf("%s ", ls->ar[i++]);

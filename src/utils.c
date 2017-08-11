@@ -36,24 +36,6 @@ void	ft_pathjoint(char **p, char *name)
 	free(*p);
 	free(tmp);
 	*p = tmp2;
-	// int		i;
-	// int		j;
-	// int		k;
-	// char	*tmp;
-	//
-	// i = ft_strlen(name);
-	// j = ft_strlen(*p);
-	// k = j;
-	// printf("%d\n", j);
-	// printf("[%c]\n", *p[j - 1]);
-	// *p[j - 1] == '/' ? --j : 0;
-	// tmp = (char*)ft_memalloc(sizeof(char) * (i + j) + 2);
-	// ft_strcat(tmp, *p);
-	// if (k == j)
-	// 	ft_strcat(tmp, "/");
-	// ft_strcat(tmp, name);
-	// // free(p);
-	// *p = tmp;
 }
 
 char	*ft_newpath(char *n)

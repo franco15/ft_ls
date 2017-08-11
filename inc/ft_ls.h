@@ -46,7 +46,7 @@ typedef struct	s_ls
 	int			opt;
 	int			size_of_arr;
 	char		*file;
-	char		*path;
+	char		*ptmp;
 	char		**ar;
 	t_options	opts;
 }				t_ls;
@@ -55,7 +55,7 @@ typedef struct	s_ls
 ** ft_ls.c
 */
 int		main(int ac, char **av);
-void	ft_ls(int ac, char **av, char *name);
+void	ft_ls(char **av, char *name);
 
 /*
 ** utils.c
@@ -68,24 +68,24 @@ int		is_there_a_dir_or_file_in_av(char **av);
 /*
 ** options.c
 */
-void	set_opts(t_ls *ls, char **s);
+void	get_opts(t_ls *ls, char **s);
 int		skipopts(char **av);
 
 /*
 ** parse.c
 */
-void	parse_ls(int ac,char **av, t_ls *ls, char *name);
- // int		get_dir_info(char *name, t_ls *ls);
+void	parse_ls(char **av, t_ls *ls, char *name);
+char	**get_dir_info(char **arr, char *name, t_ls *ls);
 
 /*
 ** sort.c
 */
-void	sort_ls(t_ls *ls);
+void	sort_ls(t_ls *ls, char **arr);
 
 /*
 ** print.c
 */
-void	print_ls(t_ls *ls);
+void	print_ls(t_ls *ls, char *name, int i);
 
 /*
 ** l_format.c

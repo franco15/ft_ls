@@ -12,45 +12,53 @@
 
 #include "ft_ls.h"
 
-static void	returning_back(t_ls *ls)
+static void	returning_back(t_ls *ls, char **arr, char *path, int i)
 {
-	(void)ls;
-	int			i;
-	char		*t_path;
+	char		*tmp;
 	struct stat	st;
 
-	i = -1;
-	while (ls->ar[++i])
+	while (arr[++i])
 	{
 		// printf("%s\n", ls->ar[i]);
 		// printf("path: %s\n", ls->path);
-		t_path = ft_strdup(ls->path);
+		ls->ptmp = ft_strdup(path);
 		// printf("%s\n", t_path);
 		// printf("pathjoint in recursion\n");
-		ft_pathjoint(&t_path, ls->ar[i]);
+		// ft_miniprintf("ls->ptmp: [%s] && ls->ar[i]: [%s]\n", ls->ptmp, arr[i]);
+		ft_pathjoint(&ls->ptmp, arr[i]);
+		// printf("smn\n");
 		// printf("t_path: [%s]\n", t_path);
-		lstat(t_path, &st);
-		if (S_ISDIR(st.st_mode) && !(ft_strcmp(ls->ar[i], ".") == 0 ||
-			ft_strcmp(ls->ar[i], "..") == 0))
+		lstat(ls->ptmp, &st);
+		if (S_ISDIR(st.st_mode) && !(ft_strcmp(arr[i], ".") == 0 ||
+			ft_strcmp(arr[i], "..") == 0))
 		{
 			// printf("ssad\n");
-			printf("%s\n", t_path);
-			ft_ls(1, &ls->ar[i], ls->ar[i]);
-			printf("\n");
+			tmp = ft_strdup(ls->ptmp);
+			free(arr[i]);
+			arr[i] = tmp;
+			ft_miniprintf("\n%s\n", ls->ptmp);
+			print_ls(ls, arr[i], -1);
 		}
 		// else
 		// 	printf("error: %s\n", strerror(errno));
-		free(t_path);
+		// free(ls->ptmp);
 	}
 }
 
-void		print_ls(t_ls *ls)
+void		print_ls(t_ls *ls, char *path, int i)
 {
+	char	**arr;
+
+	arr = 0;
+	arr = get_dir_info(arr, path, ls);
+	// printf("smn\n");
+	sort_ls(ls, arr);
 	// get_stat(ls);
 	if (ls->opt && ls->opts.l)
 		l_format(ls);
 	else
-		ft_putarr(ls->ar);
+		ft_putarr(arr);
 	if (ls->opt && ls->opts.R)
-		returning_back(ls);
+		returning_back(ls, arr, path, i);
+	// free(arr);
 }

@@ -20,7 +20,6 @@ void	ft_arrrev(char **s)
 
 	i = 0;
 	j = ft_arrlen(s) - 1;
-	ft_putarr(s);
 	while (i < j)
 		ft_swap(&s[i++], &s[j--]);
 }

@@ -12,18 +12,21 @@
 
 #include "ft_ls.h"
 
-static void	get_dir_info(char *name, t_ls *ls)
+char	**get_dir_info(char **arr, char *path, t_ls *ls)
 {
 	int				i;
 	DIR				*dir;
 	struct dirent	*sd;
 
-	// printf("path: %s\n", ls->path);
-	if (!(dir = opendir(ls->path)))
-		return ((void)ft_miniprintf("ls: %s: No such file or directory\n", name));
-	i = count_files(name);
-	ls->ar = (char**)ft_memalloc(sizeof(char*) * (i + 1));
-	ls->ar[i] = 0;
+	// printf("path: %s\n", path);
+	if (!(dir = opendir(path)))
+	{
+		ft_miniprintf("ls: %s: %s\n", path, strerror(errno));
+		return (0);
+	}
+	i = count_files(path);
+	arr = (char**)ft_memalloc(sizeof(char*) * (i + 1));
+	arr[i] = 0;
 	i = 0;
 	while ((sd = readdir(dir)) != NULL)
 	{
@@ -33,26 +36,28 @@ static void	get_dir_info(char *name, t_ls *ls)
 		if (ls->opt && ls->opts.A && !ls->opts.a && (!ft_strcmp(sd->d_name, ".")
 			|| !ft_strcmp(sd->d_name, "..")))
 			continue ;
-		ls->ar[i++] = ft_strdup(sd->d_name);
+		arr[i++] = ft_strdup(sd->d_name);
 	}
-	ls->size_of_arr = ft_arrlen(ls->ar);
+	// ls->size_of_arr = ft_arrlen(arr);
 	closedir(dir);
+	return (arr);
 }
 
-void		parse_ls(int ac, char **av, t_ls *ls, char *name)
-{
-	(void)ls;
-	static t_options	*options;
-
-	if (ac > 1)
-	{
-		if (!options)
-		{
-			set_opts(ls, av);
-			options = &ls->opts;
-		}
-		else
-			ls->opts = *options;
-	}
-	get_dir_info(name, ls);
-}
+// void		parse_ls(char **av, t_ls *ls, char *name)
+// {
+// 	(void)av;
+// 	// (void)ls;
+// 	// static t_options	*options;
+// 	//
+// 	// if (ac > 1)
+// 	// {
+// 	// 	if (!options)
+// 	// 	{
+// 	// 		set_opts(ls, av);
+// 	// 		options = &ls->opts;
+// 	// 	}
+// 	// 	else
+// 	// 		ls->opts = *options;
+// 	// }
+// 	get_dir_info(name, ls);
+// }

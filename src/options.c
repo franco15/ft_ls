@@ -43,7 +43,7 @@ static int	valid_opt(char *s)
 	return (0);
 }
 
-void		set_opts(t_ls *ls, char **s)
+void		get_opts(t_ls *ls, char **s)
 {
 	int		i;
 	int		j;

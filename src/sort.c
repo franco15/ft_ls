@@ -25,7 +25,7 @@ void	sort_ls(t_ls *ls, char **arr)
 		return ;
 	if (ls->opt && (ls->opts.t || ls->opts.u))
 	{
-		get_time(ls, arr);
+		// get_time(ls, arr);
 		// ls->opts.t ? ft_quicksort(ls->ar, 0, i - 1, ft_timesort_t_) :
 		// ft_quicksort(ls->ar, 0, i - 1, ft_timesort_u_);
 	}

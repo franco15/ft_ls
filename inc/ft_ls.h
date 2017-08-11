@@ -35,16 +35,16 @@ typedef struct	s_options
 	int			d;
 }				t_options;
 
-// typedef struct			s_stat_list
-// {
-// 	struct stat			st;
-// 	struct stat_list	next;
-// }						t_stat_list;
+typedef struct	s_st
+{
+	char			*file;
+	struct stat		st;
+}					t_st;
 
 typedef struct	s_ls
 {
 	int			opt;
-	int			size_of_arr;
+	// int			size_of_arr;
 	char		*file;
 	char		*ptmp;
 	char		**ar;
@@ -74,7 +74,7 @@ void	get_opts(t_ls *ls, char **s);
 ** parse.c
 */
 char	**get_dir_info(char **arr, char *name, t_ls *ls);
-void	get_time(t_ls *ls, char **arr);
+void	get_stat(t_st **st, char **arr, char *path, int i);
 
 /*
 ** sort.c
@@ -89,6 +89,6 @@ void	print_ls(t_ls *ls, char *name, int i);
 /*
 ** l_format.c
 */
-void	l_format(t_ls *ls);
+void	l_format(t_ls *ls, t_st *st, char **ar);
 
 #endif

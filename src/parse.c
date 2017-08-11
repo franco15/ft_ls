@@ -46,3 +46,26 @@ void	get_time(t_ls *ls, char **arr)
 	(void)ls;
 	(void)arr;
 }
+
+void	get_stat(t_st **st, char **arr, char *path, int l)
+{
+	int		i;
+	char	*p;
+	t_st	stat[l];
+
+	i = -1;
+	while (arr[++i])
+	{
+		p = ft_strdup(path);
+		ft_pathjoint(&p, arr[i]);
+		lstat(p, &stat[i].st);
+		stat->file = ft_strdup(arr[i]);
+	}
+	*st = stat;
+	i = -1;
+	while (++i < l)
+	{
+		S_ISDIR(stat[i].st.st_mode) ? ft_miniprintf("%s is dir\n",
+		arr[i]) : ft_miniprintf("%s is file\n", arr[i]);
+	}
+}

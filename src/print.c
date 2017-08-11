@@ -39,15 +39,19 @@ static void	returning_back(t_ls *ls, char **arr, char *path, int i)
 void		print_ls(t_ls *ls, char *path, int i)
 {
 	char	**arr;
+	t_st	*st;
 
+	st = 0;
 	arr = 0;
 	arr = get_dir_info(arr, path, ls);
+	get_stat(&st, arr, path, ft_arrlen(arr));
 	sort_ls(ls, arr);
 	if (ls->opt && ls->opts.l)
-		l_format(ls);
+		l_format(ls, st, arr);
 	else
 		ft_putarr(arr);
 	if (ls->opt && ls->opts.R)
 		returning_back(ls, arr, path, i);
 	free(arr);
+	// st_del();
 }

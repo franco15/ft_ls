@@ -12,7 +12,9 @@
 
 #include "ft_ls.h"
 
-void	l_format(t_ls *ls)
+void	l_format(t_ls *ls, t_st *st, char **ar)
 {
 	(void)ls;
+	(void)st;
+	(void)ar;
 }

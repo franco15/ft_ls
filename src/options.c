@@ -12,15 +12,15 @@
 
 #include "ft_ls.h"
 
-int	skipopts(char **av)
-{
-	int	i;
-
-	i = 1;
-	while (av[i] && av[i][0] == '-')
-		i++;
-	return (i);
-}
+// int	skipopts(char **av)
+// {
+// 	int	i;
+//
+// 	i = 1;
+// 	while (av[i] && av[i][0] == '-')
+// 		i++;
+// 	return (i);
+// }
 
 static void	ft_usage(char option)
 {

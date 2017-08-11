@@ -23,17 +23,13 @@ void	sort_ls(t_ls *ls, char **arr)
 	i = ft_arrlen(arr);
 	if (ls->opt && ls->opts.f)
 		return ;
-	// if (ls->opt && (ls->opts.t || ls->opts.u))
-	// {
-	// 	get_time(ls);
-	// 	ls->opts.t ? ft_quicksort(ls->ar, 0, i - 1, ft_timesort_t_) :
-	// 	ft_quicksort(ls->ar, 0, i - 1, ft_timesort_u_);
-	// }
+	if (ls->opt && (ls->opts.t || ls->opts.u))
+	{
+		get_time(ls, arr);
+		// ls->opts.t ? ft_quicksort(ls->ar, 0, i - 1, ft_timesort_t_) :
+		// ft_quicksort(ls->ar, 0, i - 1, ft_timesort_u_);
+	}
 	ft_quicksort(arr, 0, i - 1, ft_strcmp);
 	if (ls->opt && ls->opts.r)
 		ft_arrrev(arr);
-	// i = 0;
-	// while (ls->ar[i])
-	// 	printf("%s ", ls->ar[i++]);
-	// printf("\n");
 }

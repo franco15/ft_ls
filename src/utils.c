@@ -38,20 +38,6 @@ void	ft_pathjoint(char **p, char *name)
 	*p = tmp2;
 }
 
-char	*ft_newpath(char *n)
-{
-	char	*ret;
-	char	*tmp;
-
-	tmp = ft_strdup(n);
-	if (!ft_strcmp(".", n))
-		ret = ft_strjoin(tmp, "/");
-	else
-		ret = ft_strjoin("./", tmp);
-	free(tmp);
-	return (ret);
-}
-
 int		is_there_a_dir_or_file_in_av(char **av)
 {
 	int	i;

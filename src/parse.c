@@ -18,7 +18,6 @@ char	**get_dir_info(char **arr, char *path, t_ls *ls)
 	DIR				*dir;
 	struct dirent	*sd;
 
-	// printf("path: %s\n", path);
 	if (!(dir = opendir(path)))
 	{
 		ft_miniprintf("ls: %s: %s\n", path, strerror(errno));
@@ -38,26 +37,12 @@ char	**get_dir_info(char **arr, char *path, t_ls *ls)
 			continue ;
 		arr[i++] = ft_strdup(sd->d_name);
 	}
-	// ls->size_of_arr = ft_arrlen(arr);
 	closedir(dir);
 	return (arr);
 }
 
-// void		parse_ls(char **av, t_ls *ls, char *name)
-// {
-// 	(void)av;
-// 	// (void)ls;
-// 	// static t_options	*options;
-// 	//
-// 	// if (ac > 1)
-// 	// {
-// 	// 	if (!options)
-// 	// 	{
-// 	// 		set_opts(ls, av);
-// 	// 		options = &ls->opts;
-// 	// 	}
-// 	// 	else
-// 	// 		ls->opts = *options;
-// 	// }
-// 	get_dir_info(name, ls);
-// }
+void	get_time(t_ls *ls, char **arr)
+{
+	(void)ls;
+	(void)arr;
+}

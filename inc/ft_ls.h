@@ -62,20 +62,19 @@ void	ft_ls(char **av, char *name);
 */
 int		count_files(char *name);
 void	ft_pathjoint(char **p, char *name);
-char	*ft_newpath(char *n);
 int		is_there_a_dir_or_file_in_av(char **av);
 
 /*
 ** options.c
 */
 void	get_opts(t_ls *ls, char **s);
-int		skipopts(char **av);
+// int		skipopts(char **av);
 
 /*
 ** parse.c
 */
-void	parse_ls(char **av, t_ls *ls, char *name);
 char	**get_dir_info(char **arr, char *name, t_ls *ls);
+void	get_time(t_ls *ls, char **arr);
 
 /*
 ** sort.c

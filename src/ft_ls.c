@@ -15,13 +15,19 @@
 void	ft_ls(int ac, char **av, char *name)
 {
 	t_ls				*ls;
-	static char			*path;
-
-	// printf("name: %s\n", name);
-	!path ? (path = ft_newpath(name)) : ft_pathjoint(&path, name);
+	// static char			*path;
+	//
+	// // printf("name: %s\n", name);
+	// if (path)
+	// {
+	// 	ft_pathjoint(&path, name);
+	// }
+	// else
+	// 	path = name;
+		// path = ft_newpath(name);
 	// printf("path in ls: %s\n", path);
 	ls = (t_ls*)ft_memalloc(sizeof(t_ls));
-	ls->path = ft_strdup(path);
+	ls->path = ft_strdup(name);
 	parse_ls(ac, av, ls, name);
 	sort_ls(ls);
 	print_ls(ls);

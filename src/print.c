@@ -25,8 +25,10 @@ static void	returning_back(t_ls *ls)
 		// printf("%s\n", ls->ar[i]);
 		// printf("path: %s\n", ls->path);
 		t_path = ft_strdup(ls->path);
+		// printf("%s\n", t_path);
+		// printf("pathjoint in recursion\n");
 		ft_pathjoint(&t_path, ls->ar[i]);
-		// printf("t_path: %s\n", t_path);
+		// printf("t_path: [%s]\n", t_path);
 		lstat(t_path, &st);
 		if (S_ISDIR(st.st_mode) && !(ft_strcmp(ls->ar[i], ".") == 0 ||
 			ft_strcmp(ls->ar[i], "..") == 0))
@@ -36,8 +38,8 @@ static void	returning_back(t_ls *ls)
 			ft_ls(1, &ls->ar[i], ls->ar[i]);
 			printf("\n");
 		}
-		else
-			printf("error: %s\n", strerror(errno));
+		// else
+		// 	printf("error: %s\n", strerror(errno));
 		free(t_path);
 	}
 }

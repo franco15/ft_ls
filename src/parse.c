@@ -18,7 +18,8 @@ static void	get_dir_info(char *name, t_ls *ls)
 	DIR				*dir;
 	struct dirent	*sd;
 
-	if (!(dir = opendir(name)))
+	// printf("path: %s\n", ls->path);
+	if (!(dir = opendir(ls->path)))
 		return ((void)ft_miniprintf("ls: %s: No such file or directory\n", name));
 	i = count_files(name);
 	ls->ar = (char**)ft_memalloc(sizeof(char*) * (i + 1));

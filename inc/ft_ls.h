@@ -14,6 +14,7 @@
 # define FT_LS_H
 
 # include <stdio.h>
+# include <time.h>
 # include <errno.h>
 # include <string.h>
 # include <dirent.h>
@@ -33,21 +34,20 @@ typedef struct	s_options
 	int			u;
 	int			g;
 	int			d;
+	int			c;
+	int			U;
 }				t_options;
 
 typedef struct	s_st
 {
-	char			*file;
-	struct stat		st;
-}					t_st;
+	char		*file;
+	struct stat	st;
+}				t_st;
 
 typedef struct	s_ls
 {
 	int			opt;
-	// int			size_of_arr;
-	char		*file;
 	char		*ptmp;
-	char		**ar;
 	t_options	opts;
 }				t_ls;
 
@@ -73,13 +73,14 @@ void	get_opts(t_ls *ls, char **s);
 /*
 ** parse.c
 */
-char	**get_dir_info(char **arr, char *name, t_ls *ls);
+void	make_time_arr(t_ls *ls, t_st *st, char **t, char **arr);
 void	get_stat(t_st **st, char **arr, char *path, int i);
+char	**get_dir_info(char **arr, char *name, t_ls *ls);
 
 /*
 ** sort.c
 */
-void	sort_ls(t_ls *ls, char **arr);
+void	sort_ls(t_ls *ls, t_st *st, char **arr);
 
 /*
 ** print.c

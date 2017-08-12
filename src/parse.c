@@ -12,7 +12,7 @@
 
 #include "ft_ls.h"
 
-char	**get_dir_info(char **arr, char *path, t_ls *ls)
+char		**get_dir_info(char **arr, char *path, t_ls *ls)
 {
 	int				i;
 	DIR				*dir;
@@ -41,13 +41,34 @@ char	**get_dir_info(char **arr, char *path, t_ls *ls)
 	return (arr);
 }
 
-void	get_time(t_ls *ls, char **arr)
+// static char	*get_time(time_t t)
+// {
+// 	return (ctime(&t));
+// }
+/*
+** c = st_ctime | u = st_atime | t = st_mtime
+*/
+void		make_time_arr(t_ls *ls, t_st *st, char **t, char **arr)
 {
-	(void)ls;
-	(void)arr;
+	int		i;
+
+	i = ft_arrlen(arr);
+	t = (char**)ft_memalloc(sizeof(char*) * i + 1);
+	t[i] = 0;
+	i = -1;
+	while (arr[++i])
+	{
+		if (ls->opts.t || ls->opts.u)
+			t[i] = ls->opts.t ? ft_strdup(ft_itoa_base(st[i].st.st_mtime, 10)) :
+			ft_strdup(ft_itoa_base(st[i].st.st_atime, 10));
+		else if (ls->opts.c || ls->opts.U)
+			t[i] = ls->opts.c ? ft_strdup(ft_itoa_base(st[i].st.st_ctime, 10)) :
+			ft_strdup(ft_itoa_base(st[i].st.st_birthtime, 10));
+		// ft_miniprintf("[%s] time t[i] : %s\n", arr[i], t[i]);
+	}
 }
 
-void	get_stat(t_st **st, char **arr, char *path, int l)
+void		get_stat(t_st **st, char **arr, char *path, int l)
 {
 	int		i;
 	char	*p;
@@ -62,10 +83,10 @@ void	get_stat(t_st **st, char **arr, char *path, int l)
 		stat->file = ft_strdup(arr[i]);
 	}
 	*st = stat;
-	i = -1;
-	while (++i < l)
-	{
-		S_ISDIR(stat[i].st.st_mode) ? ft_miniprintf("%s is dir\n",
-		arr[i]) : ft_miniprintf("%s is file\n", arr[i]);
-	}
+	// i = -1;
+	// while (++i < l)
+	// {
+	// 	S_ISDIR(stat[i].st.st_mode) ? ft_miniprintf("%s is dir\n",
+	// 	arr[i]) : ft_miniprintf("%s is file\n", arr[i]);
+	// }
 }

@@ -45,7 +45,7 @@ void		print_ls(t_ls *ls, char *path, int i)
 	arr = 0;
 	arr = get_dir_info(arr, path, ls);
 	get_stat(&st, arr, path, ft_arrlen(arr));
-	sort_ls(ls, arr);
+	sort_ls(ls, st, arr);
 	if (ls->opt && ls->opts.l)
 		l_format(ls, st, arr);
 	else

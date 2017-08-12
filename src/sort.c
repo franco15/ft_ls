@@ -16,20 +16,34 @@
 ** c f t u v S U X
 */
 
-void	sort_ls(t_ls *ls, char **arr)
+static void	sort_stat(t_st *st, char **arr)
+{
+	(void)st;
+	(void)arr;
+}
+
+// int			timesort(const char *s1, const char *s2)
+// {
+//
+// }
+
+void		sort_ls(t_ls *ls, t_st *st, char **arr)
 {
 	int	i;
+	char	**t;
 
+	t = 0;
 	i = ft_arrlen(arr);
 	if (ls->opt && ls->opts.f)
 		return ;
-	if (ls->opt && (ls->opts.t || ls->opts.u))
+	if (ls->opt && (ls->opts.t || ls->opts.u || ls->opts.U || ls->opts.c))
 	{
-		// get_time(ls, arr);
-		// ls->opts.t ? ft_quicksort(ls->ar, 0, i - 1, ft_timesort_t_) :
-		// ft_quicksort(ls->ar, 0, i - 1, ft_timesort_u_);
+		make_time_arr(ls, st, t, arr);
+		// ft_quicksort_t(ls->ar, 0, i - 1, timesort);
+		sort_stat(st, arr);
 	}
-	ft_quicksort(arr, 0, i - 1, ft_strcmp);
+	else
+		ft_quicksort(arr, 0, i - 1, ft_strcmp);
 	if (ls->opt && ls->opts.r)
 		ft_arrrev(arr);
 }

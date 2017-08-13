@@ -22,17 +22,32 @@ static void	sort_stat(struct statdata *st, char **arr)
 	(void)arr;
 }
 
-int			timesort(void *p1, void *p2)
+static int			timesort(void *p1, void *p2)
 {
+	int				i;
+	int				j;
 	struct statdata	*a;
 	struct statdata	*b;
 
 	a = (struct statdata*)p1;
 	b = (struct statdata*)p2;
-	return (0);
+	printf("a.file: %s\n", a->file);
+	printf("a.time: %ld\n", a->t);
+	printf("b.file: %s\n", b->file);
+	printf("b.time: %ld\n", b->t);
+	i = a->t - b->t;
+	printf("i : [%d]\n", i);
+	if (!i)
+	{
+		j = ft_strcmp(a->file, b->file);
+		printf("smn\n");
+		if (j != 0)
+			return (j);
+	}
+	return (i);
 }
 
-int			normal_sort(void *p1, void *p2)
+static int		normal_sort(void *p1, void *p2)
 {
 	return (ft_strcmp(p1, p2));
 }
@@ -48,8 +63,15 @@ void		sort_ls(t_ls *ls, struct statdata *st, char **arr)
 		return ;
 	if (ls->opt && (ls->opts.t || ls->opts.u || ls->opts.U || ls->opts.c))
 	{
-		make_time_arr(ls, st, arr);
-		ft_quicksort((void**)st, 0, i - 1, timesort);
+		get_times(ls, st, arr);
+		printf("sort\n");
+		for (int i = 0; i < 9; i++)
+		{
+			printf("file %s\n", st[i].file);
+			printf("time %ld\n", st[i].t);
+		}
+		// exit(1);
+		ft_quicksort((void**)&st, 0, i - 1, timesort);
 		sort_stat(st, arr);
 	}
 	else

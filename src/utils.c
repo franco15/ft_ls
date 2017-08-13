@@ -33,8 +33,8 @@ void	ft_pathjoint(char **p, char *name)
 
 	tmp = ft_strjoin(*p, "/");
 	tmp2 = ft_strjoin(tmp, name);
-	free(*p);
-	free(tmp);
+	ft_strdel(&*p);
+	ft_strdel(&tmp);
 	*p = tmp2;
 }
 

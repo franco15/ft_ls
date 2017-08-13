@@ -41,7 +41,7 @@ typedef struct	s_options
 struct			statdata
 {
 	char		*file;
-	char		*t;
+	long		t;
 	struct stat	st;
 };
 
@@ -74,8 +74,8 @@ void	get_opts(t_ls *ls, char **s);
 /*
 ** parse.c
 */
-void	make_time_arr(t_ls *ls, struct statdata *st, char **arr);
-void	get_stat(struct statdata *st, char **arr, char *path);
+void	get_times(t_ls *ls, struct statdata *st, char **arr);
+void	get_stat(t_ls *ls,struct statdata *st, char **arr, char *path);
 char	**get_dir_info(char **arr, char *name, t_ls *ls);
 
 /*

@@ -49,7 +49,7 @@ char		**get_dir_info(char **arr, char *path, t_ls *ls)
 ** c = st_ctime | u = st_atime | t = st_mtime
 */
 
-void		make_time_arr(t_ls *ls, struct statdata *st, char **arr)
+void		get_times(t_ls *ls, struct statdata *st, char **arr)
 {
 	int		i;
 
@@ -57,25 +57,26 @@ void		make_time_arr(t_ls *ls, struct statdata *st, char **arr)
 	while (arr[++i])
 	{
 		if (ls->opts.t || ls->opts.u)
-			st[i].t = ls->opts.t ? ft_strdup(ft_itoa_base(st[i].st.st_mtime, 10)) :
-			ft_strdup(ft_itoa_base(st[i].st.st_atime, 10));
+			st[i].t = ls->opts.t ? st[i].st.st_mtime :
+			st[i].st.st_atime;
 		else if (ls->opts.c || ls->opts.U)
-			st[i].t = ls->opts.c ? ft_strdup(ft_itoa_base(st[i].st.st_ctime, 10)) :
-			ft_strdup(ft_itoa_base(st[i].st.st_birthtime, 10));
+			st[i].t = ls->opts.c ? st[i].st.st_ctime :
+			st[i].st.st_birthtime;
 		// ft_miniprintf("[%s] time t[i] : %s\n", arr[i], t[i]);
 	}
-	for (i = 0; i < 9; i++)
-	{
-		printf("%s\n", st[i].file);
-		printf("%s\n", st[i].t);
-	}
+	// printf("make time\n");
+	// for (i = 0; i < 9; i++)
+	// {
+	// 	printf("%s\n", st[i].file);
+	// 	printf("%ld\n", st[i].t);
+	// }
 }
 
-void		get_stat(struct statdata *st, char **arr, char *path)
+void		get_stat(t_ls *ls, struct statdata *st, char **arr, char *path)
 {
+	(void)ls;
 	int			i;
 	char		*p;
-	// struct statdata	stat[l];
 
 	i = -1;
 	while (arr[++i])
@@ -85,6 +86,12 @@ void		get_stat(struct statdata *st, char **arr, char *path)
 		lstat(p, &st[i].st);
 		st[i].file = ft_strdup(arr[i]);
 	}
+	// get_times(ls, st, arr);
+	// for (int i = 0; i < 9; i++)
+	// {
+	// 	printf("file %s\n", st[i].file);
+	// 	printf("time: %ld\n", st[i].t);
+	// }
 	// *st = stat;
 	// i = -1;
 	// while (++i < l)

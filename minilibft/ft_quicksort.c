@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "minilibft.h"
+#include <stdio.h>
 
 void	ft_swap(void **s, int i, int j)
 {
@@ -26,7 +27,7 @@ void	ft_quicksort(void **s, int start, int end,
 {
 	int		i;
 	int		j;
-	char	*pivot;
+	void	*pivot;
 
 	if (start >= end)
 		return ;

@@ -27,7 +27,7 @@ static void	returning_back(t_ls *ls, char **arr, char *path, int i)
 			ft_strcmp(arr[i], "..") == 0))
 		{
 			tmp = ft_strdup(ls->ptmp);
-			free(arr[i]);
+			ft_strdel(&arr[i]);
 			arr[i] = tmp;
 			ft_miniprintf("\n%s\n", ls->ptmp);
 			print_ls(ls, arr[i], -1);
@@ -42,10 +42,14 @@ void		print_ls(t_ls *ls, char *path, int i)
 	char		**arr;
 	struct statdata	st[4096];
 
-	// st = 0;
 	arr = 0;
 	arr = get_dir_info(arr, path, ls);
-	get_stat(st, arr, path);
+	get_stat(ls, st, arr, path);
+	// for (int i = 0; i < 9; i++)
+	// {
+	// 	printf("file %s\n", st[i].file);
+	// 	printf("time %ld\n", st[i].t);
+	// }
 	sort_ls(ls, st, arr);
 	if (ls->opt && ls->opts.l)
 		l_format(ls, st, arr);
@@ -53,6 +57,6 @@ void		print_ls(t_ls *ls, char *path, int i)
 		ft_putarr(arr);
 	if (ls->opt && ls->opts.R)
 		returning_back(ls, arr, path, i);
-	free(arr);
+	ft_memdel((void**)arr);
 	// st_del();
 }

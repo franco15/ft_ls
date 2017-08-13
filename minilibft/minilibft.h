@@ -45,9 +45,9 @@ void	ft_printfcolor(const char *format, ...);
 /*
 ** ft_quicksort.c
 */
-void	ft_quicksort(char **s, int start, int end,
-		int (*comp)(const char *, const char *));
-void	ft_swap(char **s1, char **s2);
+void	ft_quicksort(void **s, int start, int end,
+		int (*comp)(void *, void *));
+void	ft_swap(void **s, int i, int j);
 
 /*
 ** lst.c

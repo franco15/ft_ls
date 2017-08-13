@@ -21,7 +21,7 @@ void	ft_arrrev(char **s)
 	i = 0;
 	j = ft_arrlen(s) - 1;
 	while (i < j)
-		ft_swap(&s[i++], &s[j--]);
+		ft_swap((void**)s, i++, j--);
 }
 
 void	ft_putarr(char **s)

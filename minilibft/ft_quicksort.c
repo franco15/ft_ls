@@ -12,17 +12,17 @@
 
 #include "minilibft.h"
 
-void	ft_swap(char **s1, char **s2)
+void	ft_swap(void **s, int i, int j)
 {
-	char	*s3;
+	void	*s3;
 
-	s3 = *s1;
-	*s1 = *s2;
-	*s2 = s3;
+	s3 = s[i];
+	s[i] = s[j];
+	s[j] = s3;
 }
 
-void	ft_quicksort(char **s, int start, int end,
-		int (comp)(const char *, const char *))
+void	ft_quicksort(void **s, int start, int end,
+		int (comp)(void *, void *))
 {
 	int		i;
 	int		j;
@@ -40,7 +40,7 @@ void	ft_quicksort(char **s, int start, int end,
 		while (comp(s[j], pivot) > 0)
 			j--;
 		if (i <= j)
-			ft_swap(&s[i++], &s[j--]);
+			ft_swap(s, i++, j--);
 	}
 	ft_quicksort(s, start, j, comp);
 	ft_quicksort(s, i, end, comp);

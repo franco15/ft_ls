@@ -12,9 +12,9 @@
 
 #include "ft_ls.h"
 
-void	l_format(t_ls *ls, struct statdata *st, char **ar)
+void	l_format(t_ls *ls, void **file, char **ar)
 {
 	(void)ls;
-	(void)st;
+	(void)file;
 	(void)ar;
 }

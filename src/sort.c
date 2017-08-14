@@ -16,9 +16,9 @@
 ** c f t u v S U X
 */
 
-static void	sort_stat(struct statdata *st, char **arr)
+static void	sort_stat(void **file, char **arr)
 {
-	(void)st;
+	(void)file;
 	(void)arr;
 }
 
@@ -26,21 +26,13 @@ static int			timesort(void *p1, void *p2)
 {
 	int				i;
 	int				j;
-	struct statdata	*a;
-	struct statdata	*b;
 
-	a = (struct statdata*)p1;
-	b = (struct statdata*)p2;
-	printf("a.file: %s\n", a->file);
-	printf("a.time: %ld\n", a->t);
-	printf("b.file: %s\n", b->file);
-	printf("b.time: %ld\n", b->t);
-	i = a->t - b->t;
-	printf("i : [%d]\n", i);
+	i = ((t_data*)p1)->t - ((t_data*)p2)->t;
+	// printf("i : [%d]\n", i);
 	if (!i)
 	{
-		j = ft_strcmp(a->file, b->file);
-		printf("smn\n");
+		j = ft_strcmp(((t_data*)p1)->file, ((t_data*)p2)->file);
+		// printf("smn\n");
 		if (j != 0)
 			return (j);
 	}
@@ -49,35 +41,35 @@ static int			timesort(void *p1, void *p2)
 
 static int		normal_sort(void *p1, void *p2)
 {
-	return (ft_strcmp(p1, p2));
+	return (ft_strcmp(((t_data*)p1)->file, ((t_data*)p2)->file));
 }
 
-void		sort_ls(t_ls *ls, struct statdata *st, char **arr)
+void		sort_ls(t_ls *ls, void **file, char **arr)
 {
 	int	i;
-	char	**t;
+	// char	**t;
 
-	t = 0;
-	i = ft_arrlen(arr);
+	// t = 0;
+	i = ft_arrlen((void**)arr);
 	if (ls->opt && ls->opts.f)
 		return ;
 	if (ls->opt && (ls->opts.t || ls->opts.u || ls->opts.U || ls->opts.c))
 	{
-		get_times(ls, st, arr);
-		printf("sort\n");
-		for (int i = 0; i < 9; i++)
-		{
-			printf("file %s\n", st[i].file);
-			printf("time %ld\n", st[i].t);
-		}
+		get_times(ls, file, arr);
+		// printf("sort\n");
+		// for (int i = 0; i < 9; i++)
+		// {
+		// 	printf("file %s\n", file[i]->st.file);
+		// 	printf("time %ld\n", file[i]->st.t);
+		// }
 		// exit(1);
-		ft_quicksort((void**)&st, 0, i - 1, timesort);
-		sort_stat(st, arr);
+		ft_quicksort(file, 0, i - 1, timesort);
+		sort_stat(file, arr);
 	}
 	else
-		ft_quicksort((void**)arr, 0, i - 1, normal_sort);
+		ft_quicksort(file, 0, i - 1, normal_sort);
 	if (ls->opt && ls->opts.r)
-		ft_arrrev(arr);
+		ft_arrrev(file);
 	// int j = ft_arrlen(arr);
 	//
 	// i = -1;

@@ -27,9 +27,9 @@ typedef struct		s_list
 /*
 ** array.c
 */
-void	ft_arrrev(char **s);
+void	ft_arrrev(void **s);
 void	ft_putarr(char **s);
-size_t	ft_arrlen(char **s);
+size_t	ft_arrlen(void **s);
 
 /*
 ** conv.c

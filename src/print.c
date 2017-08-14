@@ -40,19 +40,26 @@ static void	returning_back(t_ls *ls, char **arr, char *path, int i)
 void		print_ls(t_ls *ls, char *path, int i)
 {
 	char		**arr;
-	struct statdata	st[4096];
+	void 	**file;
+	// int j = -1;
 
 	arr = 0;
 	arr = get_dir_info(arr, path, ls);
-	get_stat(ls, st, arr, path);
+	file = ft_memalloc(sizeof(t_data*) * 4096);
+	get_stat(ls, file, arr, path);
 	// for (int i = 0; i < 9; i++)
 	// {
 	// 	printf("file %s\n", st[i].file);
 	// 	printf("time %ld\n", st[i].t);
 	// }
-	sort_ls(ls, st, arr);
+	sort_ls(ls, file, arr);
+	// while (++j < (int)ft_arrlen((void**)arr))
+	// {
+	// 	printf("file: %s\n", ((t_data*)file[j])->file);
+	// 	printf("file: %ld\n", ((t_data*)file[j])->t);
+	// }
 	if (ls->opt && ls->opts.l)
-		l_format(ls, st, arr);
+		l_format(ls, file, arr);
 	else
 		ft_putarr(arr);
 	if (ls->opt && ls->opts.R)

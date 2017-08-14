@@ -38,12 +38,12 @@ typedef struct	s_options
 	int			U;
 }				t_options;
 
-struct			statdata
+typedef struct	s_data
 {
 	char		*file;
 	long		t;
 	struct stat	st;
-};
+}				t_data;
 
 typedef struct	s_ls
 {
@@ -74,14 +74,14 @@ void	get_opts(t_ls *ls, char **s);
 /*
 ** parse.c
 */
-void	get_times(t_ls *ls, struct statdata *st, char **arr);
-void	get_stat(t_ls *ls,struct statdata *st, char **arr, char *path);
+void	get_times(t_ls *ls, void **file, char **arr);
+void	get_stat(t_ls *ls, void **file, char **arr, char *path);
 char	**get_dir_info(char **arr, char *name, t_ls *ls);
 
 /*
 ** sort.c
 */
-void	sort_ls(t_ls *ls, struct statdata *st, char **arr);
+void	sort_ls(t_ls *ls, void **file, char **arr);
 
 /*
 ** print.c
@@ -91,6 +91,6 @@ void	print_ls(t_ls *ls, char *name, int i);
 /*
 ** l_format.c
 */
-void	l_format(t_ls *ls, struct statdata *st, char **ar);
+void	l_format(t_ls *ls, void **file, char **ar);
 
 #endif

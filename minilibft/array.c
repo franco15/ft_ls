@@ -13,7 +13,7 @@
 #include "minilibft.h"
 #include "stdio.h"
 
-void	ft_arrrev(char **s)
+void	ft_arrrev(void **s)
 {
 	int		i;
 	int		j;
@@ -21,7 +21,7 @@ void	ft_arrrev(char **s)
 	i = 0;
 	j = ft_arrlen(s) - 1;
 	while (i < j)
-		ft_swap((void**)s, i++, j--);
+		ft_swap(s, i++, j--);
 }
 
 void	ft_putarr(char **s)
@@ -34,7 +34,7 @@ void	ft_putarr(char **s)
 	ft_miniprintf("\n");
 }
 
-size_t		ft_arrlen(char **s)
+size_t		ft_arrlen(void **s)
 {
 	int	i;
 

@@ -16,12 +16,6 @@
 ** c f t u v S U X
 */
 
-static void	sort_stat(void **file, char **arr)
-{
-	(void)file;
-	(void)arr;
-}
-
 static int			timesort(void *p1, void *p2)
 {
 	long	i;
@@ -44,18 +38,18 @@ static int		normal_sort(void *p1, void *p2)
 	return (ft_strcmp(((t_data*)p1)->file, ((t_data*)p2)->file));
 }
 
-void		sort_ls(t_ls *ls, void **file, char **arr)
+void		sort_ls(t_ls *ls, void **file)
 {
 	int	i;
 	// char	**t;
 
 	// t = 0;
-	i = ft_arrlen((void**)arr);
+	i = ft_arrlen(file);
 	if (ls->opt && ls->opts.f)
 		return ;
 	if (ls->opt && (ls->opts.t || ls->opts.u || ls->opts.U || ls->opts.c))
 	{
-		get_times(ls, file, arr);
+		get_times(ls, file);
 		// printf("sort\n");
 		// for (int i = 0; i < 9; i++)
 		// {
@@ -64,7 +58,6 @@ void		sort_ls(t_ls *ls, void **file, char **arr)
 		// }
 		// exit(1);
 		ft_quicksort(file, 0, i - 1, timesort);
-		sort_stat(file, arr);
 	}
 	else
 		ft_quicksort(file, 0, i - 1, normal_sort);

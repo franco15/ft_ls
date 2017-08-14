@@ -49,12 +49,12 @@ char		**get_dir_info(char **arr, char *path, t_ls *ls)
 ** c = st_ctime | u = st_atime | t = st_mtime
 */
 
-void		get_times(t_ls *ls, void **file, char **arr)
+void		get_times(t_ls *ls, void **file)
 {
 	int		i;
 
 	i = -1;
-	while (arr[++i])
+	while (file[++i])
 	{
 		if (ls->opts.t || ls->opts.u)
 			((t_data*)file[i])->t = ls->opts.t ? ((t_data*)file[i])->st.st_mtime :

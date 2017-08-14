@@ -74,14 +74,14 @@ void	get_opts(t_ls *ls, char **s);
 /*
 ** parse.c
 */
-void	get_times(t_ls *ls, void **file, char **arr);
+void	get_times(t_ls *ls, void **file);
 void	get_stat(t_ls *ls, void **file, char **arr, char *path);
 char	**get_dir_info(char **arr, char *name, t_ls *ls);
 
 /*
 ** sort.c
 */
-void	sort_ls(t_ls *ls, void **file, char **arr);
+void	sort_ls(t_ls *ls, void **file);
 
 /*
 ** print.c
@@ -91,6 +91,6 @@ void	print_ls(t_ls *ls, char *name, int i);
 /*
 ** l_format.c
 */
-void	l_format(t_ls *ls, void **file, char **ar);
+void	l_format(t_ls *ls, void **file);
 
 #endif

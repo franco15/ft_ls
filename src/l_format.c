@@ -12,9 +12,8 @@
 
 #include "ft_ls.h"
 
-void	l_format(t_ls *ls, void **file, char **ar)
+void	l_format(t_ls *ls, void **file)
 {
 	(void)ls;
 	(void)file;
-	(void)ar;
 }

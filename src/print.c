@@ -40,35 +40,32 @@ static void	returning_back(t_ls *ls, void **file, char *path, int i)
 void		print_ls(t_ls *ls, char *path, int i)
 {
 	char	**arr;
-	void 	**file;
-	int j = -1;
+	void	**file;
+	int		j;
 
+	j = -1;
 	arr = 0;
 	arr = get_dir_info(arr, path, ls);
 	file = ft_memalloc(sizeof(t_data*) * 4096);
 	get_stat(ls, file, arr, path);
+	ft_memdel((void**)arr);
 	// for (int i = 0; i < 9; i++)
 	// {
 	// 	printf("file %s\n", st[i].file);
 	// 	printf("time %ld\n", st[i].t);
 	// }
-	sort_ls(ls, file, arr);
+	sort_ls(ls, file);
 	// while (++j < (int)ft_arrlen((void**)arr))
 	// {
 	// 	printf("file: %s\n", ((t_data*)file[j])->file);
 	// 	printf("file: %ld\n", ((t_data*)file[j])->t);
 	// }
 	if (ls->opt && ls->opts.l)
-		l_format(ls, file, arr);
+		l_format(ls, file);
 	else
-	{
 		while (file[++j])
-			ft_miniprintf("%s\t", ((t_data*)file[j])->file);
-		ft_miniprintf("\n");
-		// ft_putarr(file);
-	}
+			ft_miniprintf("%s\n", ((t_data*)file[j])->file);
 	if (ls->opt && ls->opts.R)
 		returning_back(ls, file, path, i);
-	ft_memdel((void**)arr);
-	// st_del();
+	// file_del();
 }

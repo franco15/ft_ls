@@ -90,6 +90,7 @@ void		get_stat(t_ls *ls, void **file, char **arr, char *path)
 		lstat(p, &((t_data*)file[i])->st);
 		((t_data*)file[i])->file = ft_strdup(arr[i]);
 	}
+	file[i] = 0;
 	// get_times(ls, st, arr);
 	// for (int i = 0; i < 9; i++)
 	// {

@@ -12,25 +12,25 @@
 
 #include "ft_ls.h"
 
-static void	returning_back(t_ls *ls, char **arr, char *path, int i)
+static void	returning_back(t_ls *ls, void **file, char *path, int i)
 {
 	char		*tmp;
 	struct stat	st;
 
-	while (arr[++i])
+	while (file[++i])
 	{
 		ls->ptmp = ft_strdup(path);
-		ft_pathjoint(&ls->ptmp, arr[i]);
+		ft_pathjoint(&ls->ptmp, ((t_data*)file[i])->file);
 		// printf("path in recursion [%s]\n", ls->ptmp);
 		lstat(ls->ptmp, &st);
-		if (S_ISDIR(st.st_mode) && !(ft_strcmp(arr[i], ".") == 0 ||
-			ft_strcmp(arr[i], "..") == 0))
+		if (S_ISDIR(st.st_mode) && !(ft_strcmp(((t_data*)file[i])->file, ".") == 0 ||
+			ft_strcmp(((t_data*)file[i])->file, "..") == 0))
 		{
 			tmp = ft_strdup(ls->ptmp);
-			ft_strdel(&arr[i]);
-			arr[i] = tmp;
+			ft_strdel(&((t_data*)file[i])->file);
+			((t_data*)file[i])->file = tmp;
 			ft_miniprintf("\n%s\n", ls->ptmp);
-			print_ls(ls, arr[i], -1);
+			print_ls(ls, ((t_data*)file[i])->file, -1);
 		}
 		// else
 		// 	printf("error: %s\n", strerror(errno));
@@ -39,9 +39,9 @@ static void	returning_back(t_ls *ls, char **arr, char *path, int i)
 
 void		print_ls(t_ls *ls, char *path, int i)
 {
-	char		**arr;
+	char	**arr;
 	void 	**file;
-	// int j = -1;
+	int j = -1;
 
 	arr = 0;
 	arr = get_dir_info(arr, path, ls);
@@ -61,9 +61,14 @@ void		print_ls(t_ls *ls, char *path, int i)
 	if (ls->opt && ls->opts.l)
 		l_format(ls, file, arr);
 	else
-		ft_putarr(arr);
+	{
+		while (file[++j])
+			ft_miniprintf("%s\t", ((t_data*)file[j])->file);
+		ft_miniprintf("\n");
+		// ft_putarr(file);
+	}
 	if (ls->opt && ls->opts.R)
-		returning_back(ls, arr, path, i);
+		returning_back(ls, file, path, i);
 	ft_memdel((void**)arr);
 	// st_del();
 }

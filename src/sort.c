@@ -24,15 +24,15 @@ static void	sort_stat(void **file, char **arr)
 
 static int			timesort(void *p1, void *p2)
 {
-	int				i;
-	int				j;
+	long	i;
+	long	j;
 
 	i = ((t_data*)p1)->t - ((t_data*)p2)->t;
-	// printf("i : [%d]\n", i);
+	// printf("i : [%ld]\n", i);
 	if (!i)
 	{
 		j = ft_strcmp(((t_data*)p1)->file, ((t_data*)p2)->file);
-		// printf("smn\n");
+		// printf("j : [%ld]\n", j);
 		if (j != 0)
 			return (j);
 	}

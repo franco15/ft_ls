@@ -14,12 +14,15 @@
 # define FT_LS_H
 
 # include <stdio.h>
+# include <pwd.h>
+# include <grp.h>
 # include <time.h>
 # include <errno.h>
 # include <string.h>
 # include <dirent.h>
-# include <sys/types.h>
 # include <sys/stat.h>
+# include <sys/xattr.h>
+# include <sys/types.h>
 # include "minilibft.h"
 
 typedef struct	s_options
@@ -40,14 +43,16 @@ typedef struct	s_options
 
 typedef struct	s_data
 {
-	char		*file;
 	long		t;
+	char		*file;
+	char		*path;
 	struct stat	st;
 }				t_data;
 
 typedef struct	s_ls
 {
 	int			opt;
+	long		blocks;
 	char		*ptmp;
 	t_options	opts;
 }				t_ls;
@@ -91,6 +96,6 @@ void	print_ls(t_ls *ls, char *name, int i);
 /*
 ** l_format.c
 */
-void	l_format(t_ls *ls, void **file);
+void	l_format(t_ls *ls, t_data *file);
 
 #endif

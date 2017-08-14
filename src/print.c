@@ -61,7 +61,8 @@ void		print_ls(t_ls *ls, char *path, int i)
 	// 	printf("file: %ld\n", ((t_data*)file[j])->t);
 	// }
 	if (ls->opt && ls->opts.l)
-		l_format(ls, file);
+		while (file[++j])
+			l_format(ls, (t_data*)file[j]);
 	else
 		while (file[++j])
 			ft_miniprintf("%s\n", ((t_data*)file[j])->file);

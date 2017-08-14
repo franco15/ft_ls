@@ -63,12 +63,17 @@ void		get_opts(t_ls *ls, char **s)
 				s[i][j] == 'R' ? (ls->opts.R = 1) : (ls->opts.r = 1);
 			else if (s[i][j] == 't' || s[i][j] == 'f')
 				s[i][j] == 't' ? (ls->opts.t = 1) : (ls->opts.f = 1);
-			else if (s[i][j] == 'u' || s[i][j] == 'g')
-				s[i][j] == 'u' ? (ls->opts.u = 1) : (ls->opts.g = 1);
+			else if (s[i][j] == 'u')
+				ls->opts.u = 1;
 			else if (s[i][j] == 'd' || s[i][j] == 'A')
 				s[i][j] == 'd' ? (ls->opts.d = 1) : (ls->opts.A = 1);
 			else if (s[i][j] == 'U' || s[i][j] == 'c')
 				s[i][j] == 'U' ? (ls->opts.U = 1) : (ls->opts.c = 1);
+			else if (s[i][j] == 'g')
+			{
+				ls->opts.l = 1;
+				ls->opts.g = 1;
+			}
 		}
 	}
 }

@@ -87,6 +87,7 @@ void		get_stat(t_ls *ls, void **file, char **arr, char *path)
 		file[i] = st;
 		p = ft_strdup(path);
 		ft_pathjoint(&p, arr[i]);
+		((t_data*)file[i])->path = ft_strdup(p);
 		lstat(p, &((t_data*)file[i])->st);
 		((t_data*)file[i])->file = ft_strdup(arr[i]);
 	}

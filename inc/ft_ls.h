@@ -63,6 +63,7 @@ typedef struct		s_ls
 */
 int					main(int ac, char **av);
 void				ft_ls(char **av, char *name);
+void				print_link(char *path);
 
 /*
 ** utils.c

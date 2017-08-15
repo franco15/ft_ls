@@ -108,7 +108,7 @@ void		l_format(t_ls *ls, t_data *file)
 	print_size(file);
 	time_opts(ls) == 0 ? print_time(ls, file, 0) : print_time(ls, file, 1);
 	ft_miniprintf("%s", file->file);
-	// if (islink)
-	// 	print_link();
+	if (S_ISLNK(file->st.st_mode))
+		print_link(file->path);
 	ft_miniprintf("\n");
 }

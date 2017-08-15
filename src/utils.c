@@ -14,9 +14,9 @@
 
 int		count_files(char *name)
 {
-	int i;
-	DIR *dir;
-	struct dirent *sd;
+	int				i;
+	DIR				*dir;
+	struct dirent	*sd;
 
 	i = 0;
 	dir = opendir(name);
@@ -31,11 +31,19 @@ void	ft_pathjoint(char **p, char *name)
 	char	*tmp;
 	char	*tmp2;
 
-	tmp = ft_strjoin(*p, "/");
-	tmp2 = ft_strjoin(tmp, name);
-	ft_strdel(&*p);
-	ft_strdel(&tmp);
+	tmp = 0;
+	if (ft_strcmp(*p, "/"))
+		tmp = ft_strjoin(*p, "/");
+	if (tmp)
+		tmp2 = ft_strjoin(tmp, name);
+	else
+		tmp2 = ft_strjoin(*p, name);
+	ft_memdel((void**)&*p);
+	if (tmp)
+		ft_memdel((void**)&tmp);
 	*p = tmp2;
+	// printf("[[[%s]]]\n", *p);
+	// exit(1);
 }
 
 int		is_there_a_dir_or_file_in_av(char **av)
@@ -52,7 +60,16 @@ int		is_there_a_dir_or_file_in_av(char **av)
 
 int		time_opts(t_ls *ls)
 {
-	if (!ls->opts.t && !ls->opts.u && !ls->opts.c && !ls->opts.U)
+	if (!ls->opts.t && !ls->opts.u && !ls->opts.c && !ls->opts.uu)
 		return (0);
 	return (1);
+}
+
+void	print_blocks(long long blocks)
+{
+	char	*tmp;
+
+	tmp = ft_itoa_base(blocks, 10);
+	ft_miniprintf("total %s\n", tmp);
+	// ft_memdel((void**)&tmp);
 }

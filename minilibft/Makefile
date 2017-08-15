@@ -1,7 +1,7 @@
 NAME = libft.a
 
 SRC =	ft_printf.c ft_quicksort.c put.c strings.c strings2.c conv.c mem.c\
-		mem2.c array.c lst.c\
+		mem2.c array.c\
 
 OBJ = $(SRC:.c=.o)
 

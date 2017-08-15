@@ -12,6 +12,19 @@
 
 #include "ft_ls.h"
 
+void		time_get(t_ls *ls, t_data *file)
+{
+	if (ls->opts.u)
+		file->t2 = file->st.st_atimespec;
+	else if (!ls->opts.t && ls->opts.c)
+		file->t2 = file->st.st_ctimespec;
+	else if (ls->opts.uu)
+		file->t2 = file->st.st_birthtimespec;
+	else
+		file->t2 = file->st.st_mtimespec;
+}
+
+
 char		**get_dir_info(char **arr, char *path, t_ls *ls)
 {
 	int				i;
@@ -29,25 +42,17 @@ char		**get_dir_info(char **arr, char *path, t_ls *ls)
 	i = 0;
 	while ((sd = readdir(dir)) != NULL)
 	{
-		if ((ls->opt && (!ls->opts.a && !ls->opts.A) && sd->d_name[0] == '.') ||
-			(!ls->opt && sd->d_name[0] == '.'))
+		if ((ls->o && ((!ls->opts.a && !ls->opts.d && !ls->opts.f) &&
+	!ls->opts.aa) && sd->d_name[0] == '.') || (!ls->o && sd->d_name[0] == '.'))
 			continue ;
-		if (ls->opt && ls->opts.A && !ls->opts.a && (!ft_strcmp(sd->d_name, ".")
-			|| !ft_strcmp(sd->d_name, "..")))
+		if (ls->o && ls->opts.aa && !ls->opts.a &&
+			(!ft_strcmp(sd->d_name, ".") || !ft_strcmp(sd->d_name, "..")))
 			continue ;
 		arr[i++] = ft_strdup(sd->d_name);
 	}
 	closedir(dir);
 	return (arr);
 }
-
-// static char	*get_time(time_t t)
-// {
-// 	return (ctime(&t));
-// }
-/*
-** c = st_ctime | u = st_atime | t = st_mtime
-*/
 
 void		get_times(t_ls *ls, void **file)
 {
@@ -56,27 +61,19 @@ void		get_times(t_ls *ls, void **file)
 	i = -1;
 	while (file[++i])
 	{
-		if (ls->opts.t && !ls->opts.u && !ls->opts.c && !ls->opts.U)
+		if (ls->opts.t && !ls->opts.u && !ls->opts.c && !ls->opts.uu)
 			((t_data*)file[i])->t = ((t_data*)file[i])->st.st_mtimespec;
 		else if (ls->opts.t && ls->opts.u)
 			((t_data*)file[i])->t = ((t_data*)file[i])->st.st_atimespec;
 		else if (ls->opts.t && ls->opts.c)
 			((t_data*)file[i])->t = ((t_data*)file[i])->st.st_ctimespec;
-		else if (ls->opts.t && ls->opts.U)
+		else if (ls->opts.t && ls->opts.uu)
 			((t_data*)file[i])->t = ((t_data*)file[i])->st.st_birthtimespec;
-		// ft_miniprintf("[%s] time t[i] : %s\n", arr[i], t[i]);
 	}
-	// printf("make time\n");
-	// for (i = 0; i < 9; i++)
-	// {
-	// 	printf("%s\n", st[i].file);
-	// 	printf("%ld\n", st[i].t);
-	// }
 }
 
 void		get_stat(t_ls *ls, void **file, char **arr, char *path)
 {
-	(void)ls;
 	int		i;
 	char	*p;
 	t_data	*st;
@@ -94,19 +91,7 @@ void		get_stat(t_ls *ls, void **file, char **arr, char *path)
 		lstat(p, &((t_data*)file[i])->st);
 		((t_data*)file[i])->file = ft_strdup(arr[i]);
 		ls->blocks += ((t_data*)file[i])->st.st_blocks;
+		ft_memdel((void**)&p);
 	}
 	file[i] = 0;
-	// get_times(ls, st, arr);
-	// for (int i = 0; i < 9; i++)
-	// {
-	// 	printf("file %s\n", st[i].file);
-	// 	printf("time: %ld\n", st[i].t);
-	// }
-	// *st = stat;
-	// i = -1;
-	// while (++i < l)
-	// {
-	// 	// S_ISDIR(stat[i].st.st_mode) ? ft_miniprintf("%s is dir\n",
-	// 	// arr[i]) : ft_miniprintf("%s is file\n", arr[i]);
-	// }
 }

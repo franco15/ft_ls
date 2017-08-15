@@ -50,16 +50,6 @@ void	ft_quicksort(void **s, int start, int end,
 void	ft_swap(void **s, int i, int j);
 
 /*
-** lst.c
-*/
-void	ft_lstaddback(t_list **alst, t_list *new);
-void	ft_lstdel(t_list **alst, void (*bzero)(void *, size_t));
-void	ft_lstdelone(t_list **alst, void (*del)(void *, size_t));
-void	ft_lst_add_at_last(t_list **last, t_list *new);
-t_list	*ft_lstnew(void const *content, size_t size);
-void	ft_lstadd(t_list **alst, t_list *new);
-
-/*
 ** mem.c
 */
 void	*ft_memalloc(size_t size);

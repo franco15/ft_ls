@@ -21,55 +21,82 @@ static void	returning_back(t_ls *ls, void **file, char *path, int i)
 	{
 		ls->ptmp = ft_strdup(path);
 		ft_pathjoint(&ls->ptmp, ((t_data*)file[i])->file);
-		// printf("path in recursion [%s]\n", ls->ptmp);
 		lstat(ls->ptmp, &st);
-		if (S_ISDIR(st.st_mode) && !(ft_strcmp(((t_data*)file[i])->file, ".") == 0 ||
-			ft_strcmp(((t_data*)file[i])->file, "..") == 0))
+		if (S_ISDIR(st.st_mode) && !(ft_strcmp(((t_data*)file[i])->file, ".")
+			== 0 || ft_strcmp(((t_data*)file[i])->file, "..") == 0))
 		{
 			tmp = ft_strdup(ls->ptmp);
-			ft_strdel(&((t_data*)file[i])->file);
+			// ft_strdel(&((t_data*)file[i])->file);
 			((t_data*)file[i])->file = tmp;
 			ft_miniprintf("\n%s\n", ls->ptmp);
 			print_ls(ls, ((t_data*)file[i])->file, -1);
+			//free tmp?
 		}
-		// else
-		// 	printf("error: %s\n", strerror(errno));
 	}
 }
 
-void		print_ls(t_ls *ls, char *path, int i)
+static void	ls_print(t_ls *ls, void **file)
 {
-	char	**arr;
-	void	**file;
-	int		j;
+	int	j;
 
 	j = -1;
-	arr = 0;
-	arr = get_dir_info(arr, path, ls);
-	file = ft_memalloc(sizeof(t_data*) * 4096);
-	get_stat(ls, file, arr, path);
-	ft_memdel((void**)arr);
-	// for (int i = 0; i < 9; i++)
-	// {
-	// 	printf("file %s\n", st[i].file);
-	// 	printf("time %ld\n", st[i].t);
-	// }
-	sort_ls(ls, file);
-	// while (++j < (int)ft_arrlen((void**)arr))
-	// {
-	// 	printf("file: %s\n", ((t_data*)file[j])->file);
-	// 	printf("file: %ld\n", ((t_data*)file[j])->t);
-	// }
-	if (ls->opt && ls->opts.l)
+	if (ls->o && ls->opts.l)
 	{
-		print_blocks(ls->blocks);
+		if (ls->o && ls->opts.d)
+		{
+			l_format(ls, (t_data*)file[0]);
+			return ;
+		}
+		ls->blocks > 0 ? print_blocks(ls->blocks) : 0;
 		while (file[++j])
 			l_format(ls, (t_data*)file[j]);
 	}
 	else
+	{
+		if (ls->o && ls->opts.d)
+		{
+			ft_miniprintf("%s\n", ".");
+			return ;
+		}
 		while (file[++j])
 			ft_miniprintf("%s\n", ((t_data*)file[j])->file);
-	if (ls->opt && ls->opts.R)
+	}
+}
+
+// static void	file_del(void ***file)
+// {
+// 	int		i;
+// 	void	**tmp;
+//
+// 	i = -1;
+// 	tmp = **file;
+// 	while (tmp[++i])
+// 	{
+// 		ft_memdel((void**)&((t_data*)file[i])->file);
+// 		ft_memdel((void**)&((t_data*)file[i])->path);
+// 	}
+// 	ft_memdel(tmp);
+// }
+
+void		print_ls(t_ls *ls, char *path, int i)
+{
+	int		j;
+	char	**arr;
+	void	**file;
+
+	j = -1;
+	arr = 0;
+	arr = get_dir_info(arr, path, ls);
+	if (!arr)
+		return ;
+	file = ft_memalloc(sizeof(t_data*) * 4096);
+	get_stat(ls, file, arr, path);
+	while (arr[++j])
+		ft_memdel((void**)&arr[j]);
+	ft_memdel((void**)&arr);
+	sort_ls(ls, file);
+	ls_print(ls, file);
+	if (ls->o && ls->opts.rr && !ls->opts.d)
 		returning_back(ls, file, path, i);
-	// file_del();
+	// file_del(&file);
 }

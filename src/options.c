@@ -12,16 +12,6 @@
 
 #include "ft_ls.h"
 
-// int	skipopts(char **av)
-// {
-// 	int	i;
-//
-// 	i = 1;
-// 	while (av[i] && av[i][0] == '-')
-// 		i++;
-// 	return (i);
-// }
-
 static void	ft_usage(char option)
 {
 	ft_miniprintf("ls: illegal option -- %c\n", option);
@@ -43,6 +33,33 @@ static int	valid_opt(char *s)
 	return (0);
 }
 
+static void	more_opts(t_ls *ls, char **s, int i, int j)
+{
+	while (s[i][j] && valid_opt(&s[i][j]))
+	{
+		if (s[i][j] == 'd')
+			ls->opts.d = 1;
+		else if (s[i][j] == 'A')
+			ls->opts.aa = 1;
+		else if (s[i][j] == 'U' || s[i][j] == 'c')
+			ls->opts.uu = 1;
+		else if (s[i][j] == 'c')
+			ls->opts.c = 1;
+		else if (s[i][j] == 'f')
+			ls->opts.f = 1;
+		else if (s[i][j] == 'u')
+			ls->opts.u = 1;
+		else if (s[i][j] == 't')
+			ls->opts.t = 1;
+		else if (s[i][j] == 'g')
+		{
+			ls->opts.l = 1;
+			ls->opts.g = 1;
+		}
+		j++;
+	}
+}
+
 void		get_opts(t_ls *ls, char **s)
 {
 	int		i;
@@ -54,26 +71,19 @@ void		get_opts(t_ls *ls, char **s)
 		if (!ft_strcmp("-", s[i]))
 			ft_miniprintf("ls: -: No such file or directory\n");
 		j = 0;
-		ls->opt = 1;
+		ls->o = 1;
 		while (s[i][++j] && valid_opt(&s[i][j]))
 		{
-			if (s[i][j] == 'l' || s[i][j] == 'a')
-				s[i][j] == 'l' ? (ls->opts.l = 1) : (ls->opts.a = 1);
-			else if (s[i][j] == 'R' || s[i][j] == 'r')
-				s[i][j] == 'R' ? (ls->opts.R = 1) : (ls->opts.r = 1);
-			else if (s[i][j] == 't' || s[i][j] == 'f')
-				s[i][j] == 't' ? (ls->opts.t = 1) : (ls->opts.f = 1);
-			else if (s[i][j] == 'u')
-				ls->opts.u = 1;
-			else if (s[i][j] == 'd' || s[i][j] == 'A')
-				s[i][j] == 'd' ? (ls->opts.d = 1) : (ls->opts.A = 1);
-			else if (s[i][j] == 'U' || s[i][j] == 'c')
-				s[i][j] == 'U' ? (ls->opts.U = 1) : (ls->opts.c = 1);
-			else if (s[i][j] == 'g')
-			{
+			if (s[i][j] == 'l')
 				ls->opts.l = 1;
-				ls->opts.g = 1;
-			}
+			else if (s[i][j] == 'a')
+				ls->opts.a = 1;
+			else if (s[i][j] == 'R')
+				ls->opts.rr = 1;
+			else if (s[i][j] == 'r')
+				ls->opts.r = 1;
+			else
+				more_opts(ls, s, i, j);
 		}
 	}
 }

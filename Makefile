@@ -41,13 +41,14 @@ $(NAME): $(OBJ)
 
 # clean rule
 clean:
-	@rm -Rf $(OBJ_DIR)
+	@rm -rf $(OBJ_DIR)
 	@make -C $(LIBFT_DIR) clean
 	@echo "¯\_(ツ)_/¯ Objects ded!"
 
 # fclean rule
 fclean: clean
 	@rm -f $(NAME)
+	@rm -rf ft_ls.dSYM
 	@make -C $(LIBFT_DIR) fclean
 	@echo "(╯°□°）╯︵ ┻━┻ $(NAME) ded!"
 

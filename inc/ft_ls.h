@@ -1,4 +1,4 @@
- /* ************************************************************************** */
+/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   ft_ls.h                                            :+:      :+:    :+:   */
@@ -25,79 +25,80 @@
 # include <sys/types.h>
 # include "minilibft.h"
 
-typedef struct	s_options
+typedef struct		s_options
 {
-	int			l;
-	int			R;
-	int			r;
-	int			A;
-	int			a;
-	int			t;
-	int			f;
-	int			u;
-	int			g;
-	int			d;
-	int			c;
-	int			U;
-}				t_options;
+	int				l;
+	int				rr;
+	int				r;
+	int				aa;
+	int				a;
+	int				t;
+	int				f;
+	int				u;
+	int				g;
+	int				d;
+	int				c;
+	int				uu;
+}					t_options;
 
 typedef struct		s_data
 {
 	struct timespec t;
+	struct timespec t2;
 	char			*file;
 	char			*path;
 	struct stat		st;
-}				t_data;
+}					t_data;
 
-typedef struct	s_ls
+typedef struct		s_ls
 {
-	int			opt;
-	long long	blocks;
-	char		*ptmp;
-	t_options	opts;
-}				t_ls;
+	int				o;
+	long long		blocks;
+	char			*ptmp;
+	t_options		opts;
+}					t_ls;
 
 /*
 ** ft_ls.c
 */
-int		main(int ac, char **av);
-void	ft_ls(char **av, char *name);
+int					main(int ac, char **av);
+void				ft_ls(char **av, char *name);
 
 /*
 ** utils.c
 */
-int		time_opts(t_ls *ls);
-int		count_files(char *name);
-void	ft_pathjoint(char **p, char *name);
-int		is_there_a_dir_or_file_in_av(char **av);
+int					time_opts(t_ls *ls);
+int					count_files(char *name);
+int					is_there_a_dir_or_file_in_av(char **av);
+void				print_blocks(long long blocks);
+void				ft_pathjoint(char **p, char *name);
 
 /*
 ** options.c
 */
-void	get_opts(t_ls *ls, char **s);
-// int		skipopts(char **av);
+void				get_opts(t_ls *ls, char **s);
 
 /*
 ** parse.c
 */
-void	get_times(t_ls *ls, void **file);
-void	get_stat(t_ls *ls, void **file, char **arr, char *path);
-char	**get_dir_info(char **arr, char *name, t_ls *ls);
+void				get_times(t_ls *ls, void **file);
+void				get_stat(t_ls *ls, void **file, char **arr, char *path);
+char				**get_dir_info(char **arr, char *name, t_ls *ls);
+void				time_get(t_ls *ls, t_data *file);
 
 /*
 ** sort.c
 */
-void	sort_ls(t_ls *ls, void **file);
+void				sort_ls(t_ls *ls, void **file);
 
 /*
 ** print.c
 */
-void	print_ls(t_ls *ls, char *name, int i);
+void				print_ls(t_ls *ls, char *name, int i);
 
 /*
 ** l_format.c
 */
-void	l_format(t_ls *ls, t_data *file);
-void	print_blocks(long long blocks);
+void				l_format(t_ls *ls, t_data *file);
 
 #endif

@@ -37,8 +37,8 @@ char		**get_dir_info(char **arr, char *path, t_ls *ls)
 		return (0);
 	}
 	i = count_files(path);
-	arr = (char**)ft_memalloc(sizeof(char*) * (i + 1));
-	arr[i] = 0;
+	arr = (char**)ft_memalloc((sizeof(char*) * i) + 1);
+	// arr[i] = 0;
 	i = 0;
 	while ((sd = readdir(dir)) != NULL)
 	{

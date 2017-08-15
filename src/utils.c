@@ -42,8 +42,6 @@ void	ft_pathjoint(char **p, char *name)
 	if (tmp)
 		ft_memdel((void**)&tmp);
 	*p = tmp2;
-	// printf("[[[%s]]]\n", *p);
-	// exit(1);
 }
 
 int		is_there_a_dir_or_file_in_av(char **av)
@@ -71,5 +69,5 @@ void	print_blocks(long long blocks)
 
 	tmp = ft_itoa_base(blocks, 10);
 	ft_miniprintf("total %s\n", tmp);
-	// ft_memdel((void**)&tmp);
+	ft_memdel((void**)&tmp);
 }

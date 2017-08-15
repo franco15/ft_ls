@@ -35,6 +35,28 @@ static void	returning_back(t_ls *ls, void **file, char *path, int i)
 	}
 }
 
+void		print_print(t_ls *ls, t_data *file)
+{
+	int	j;
+
+	j = -1;
+	if (ls->o && ls->opts.d)
+	{
+		ft_printfcolor("%s\n", ".", 36);
+		return ;
+	}
+	if (S_ISDIR(file->st.st_mode))
+		ft_printfcolor("%s\n", file->file, 36);
+	else if (S_ISREG(file->st.st_mode) && ((file->st.st_mode & S_IXUSR) ||
+		(file->st.st_mode & S_IXGRP) || (file->st.st_mode & S_IXOTH)))
+		ft_printfcolor("%s\n", file->file, 31);
+	else
+	{
+		printf("smn\n");
+		ft_miniprintf("%s\n", file->file);
+	}
+}
+
 static void	ls_print(t_ls *ls, void **file)
 {
 	int	j;
@@ -53,13 +75,8 @@ static void	ls_print(t_ls *ls, void **file)
 	}
 	else
 	{
-		if (ls->o && ls->opts.d)
-		{
-			ft_miniprintf("%s\n", ".");
-			return ;
-		}
 		while (file[++j])
-			ft_miniprintf("%s\n", ((t_data*)file[j])->file);
+			print_print(ls, (t_data*)file[j]);
 	}
 }
 

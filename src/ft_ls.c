@@ -20,7 +20,6 @@ void		print_link(char *path)
 	i = readlink(path, tmp, 1023);
 	tmp[i] = '\0';
 	ft_miniprintf(" -> %s", tmp);
-	ft_memdel(tmp);
 }
 
 static void	ls_del_opts(t_ls *ls)

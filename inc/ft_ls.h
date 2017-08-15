@@ -96,6 +96,7 @@ void				sort_ls(t_ls *ls, void **file);
 ** print.c
 */
 void				print_ls(t_ls *ls, char *name, int i);
+void				print_print(t_ls *ls, t_data *file);
 
 /*
 ** l_format.c

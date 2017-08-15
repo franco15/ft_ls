@@ -52,7 +52,7 @@ void		get_opts(t_ls *ls, char **s)
 	while (s[++i] && s[i][0] == '-')
 	{
 		if (!ft_strcmp("-", s[i]))
-			ft_miniprintf("ls: -: No such file or directory");
+			ft_miniprintf("ls: -: No such file or directory\n");
 		j = 0;
 		ls->opt = 1;
 		while (s[i][++j] && valid_opt(&s[i][j]))

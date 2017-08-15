@@ -56,12 +56,14 @@ void		get_times(t_ls *ls, void **file)
 	i = -1;
 	while (file[++i])
 	{
-		if (ls->opts.t || ls->opts.u)
-			((t_data*)file[i])->t = ls->opts.t ? ((t_data*)file[i])->st.st_mtime :
-			((t_data*)file[i])->st.st_atime;
-		else if (ls->opts.c/* || ls->opts.U*/)
-			((t_data*)file[i])->t = /* s->opts.c ? */ ((t_data*)file[i])->st.st_ctime /* :
-			((t_data*)file[i])->st.st_birthtime*/;
+		if (ls->opts.t && !ls->opts.u && !ls->opts.c && !ls->opts.U)
+			((t_data*)file[i])->t = ((t_data*)file[i])->st.st_mtimespec;
+		else if (ls->opts.t && ls->opts.u)
+			((t_data*)file[i])->t = ((t_data*)file[i])->st.st_atimespec;
+		else if (ls->opts.t && ls->opts.c)
+			((t_data*)file[i])->t = ((t_data*)file[i])->st.st_ctimespec;
+		else if (ls->opts.t && ls->opts.U)
+			((t_data*)file[i])->t = ((t_data*)file[i])->st.st_birthtimespec;
 		// ft_miniprintf("[%s] time t[i] : %s\n", arr[i], t[i]);
 	}
 	// printf("make time\n");
@@ -81,6 +83,7 @@ void		get_stat(t_ls *ls, void **file, char **arr, char *path)
 
 	st = 0;
 	i = -1;
+	ls->blocks = 0;
 	while (arr[++i])
 	{
 		st = (t_data*)ft_memalloc(sizeof(t_data));
@@ -90,6 +93,7 @@ void		get_stat(t_ls *ls, void **file, char **arr, char *path)
 		((t_data*)file[i])->path = ft_strdup(p);
 		lstat(p, &((t_data*)file[i])->st);
 		((t_data*)file[i])->file = ft_strdup(arr[i]);
+		ls->blocks += ((t_data*)file[i])->st.st_blocks;
 	}
 	file[i] = 0;
 	// get_times(ls, st, arr);

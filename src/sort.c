@@ -16,19 +16,24 @@
 ** c f t u v S U X
 */
 
-static int			timesort(void *p1, void *p2)
+static int		timesort(void *p1, void *p2)
 {
 	long	i;
 	long	j;
 
-	i = ((t_data*)p1)->t - ((t_data*)p2)->t;
+	// printf("p1: %s\np2: %s\n", ((t_data*)p1)->file, ((t_data*)p2)->file);
+	// printf("p1: %s\np2: %s\n", ctime(&((t_data*)p1)->t), ctime(&((t_data*)p2)->t));
+	i = ((t_data*)p1)->t.tv_sec - ((t_data*)p2)->t.tv_sec;
+	// printf("p1: %ld\n", ((t_data*)p1)->t);
+	// printf("p2: %ld\n", ((t_data*)p2)->t);
 	// printf("i : [%ld]\n", i);
 	if (!i)
 	{
-		j = ft_strcmp(((t_data*)p1)->file, ((t_data*)p2)->file);
+		j = ((t_data*)p1)->t.tv_nsec - ((t_data*)p2)->t.tv_nsec;
 		// printf("j : [%ld]\n", j);
-		if (j != 0)
-			return (j);
+		if (!j)
+			return (ft_strcmp(((t_data*)p2)->file, ((t_data*)p1)->file));
+		return (j);
 	}
 	return (i);
 }
@@ -58,6 +63,8 @@ void		sort_ls(t_ls *ls, void **file)
 		// }
 		// exit(1);
 		ft_quicksort(file, 0, i - 1, timesort);
+		// if (ls->opts.t)
+		ft_arrrev(file);
 	}
 	else
 		ft_quicksort(file, 0, i - 1, normal_sort);

@@ -49,3 +49,10 @@ int		is_there_a_dir_or_file_in_av(char **av)
 		return (i);
 	return (0);
 }
+
+int		time_opts(t_ls *ls)
+{
+	if (!ls->opts.t && !ls->opts.u && !ls->opts.c && !ls->opts.U)
+		return (0);
+	return (1);
+}

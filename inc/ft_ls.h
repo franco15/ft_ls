@@ -41,18 +41,18 @@ typedef struct	s_options
 	int			U;
 }				t_options;
 
-typedef struct	s_data
+typedef struct		s_data
 {
-	long		t;
-	char		*file;
-	char		*path;
-	struct stat	st;
+	struct timespec t;
+	char			*file;
+	char			*path;
+	struct stat		st;
 }				t_data;
 
 typedef struct	s_ls
 {
 	int			opt;
-	long		blocks;
+	long long	blocks;
 	char		*ptmp;
 	t_options	opts;
 }				t_ls;
@@ -66,6 +66,7 @@ void	ft_ls(char **av, char *name);
 /*
 ** utils.c
 */
+int		time_opts(t_ls *ls);
 int		count_files(char *name);
 void	ft_pathjoint(char **p, char *name);
 int		is_there_a_dir_or_file_in_av(char **av);
@@ -97,5 +98,6 @@ void	print_ls(t_ls *ls, char *name, int i);
 ** l_format.c
 */
 void	l_format(t_ls *ls, t_data *file);
+void	print_blocks(long long blocks);
 
 #endif

@@ -31,6 +31,7 @@ static void	returning_back(t_ls *ls, void **file, char *path, int i)
 			ft_miniprintf("\n%s\n", ls->ptmp);
 			print_ls(ls, ((t_data*)file[i])->file, -1);
 			ft_memdel((void**)&tmp);
+			ft_memdel((void**)&ls->ptmp);
 		}
 	}
 }
@@ -50,6 +51,8 @@ void		print_print(t_ls *ls, t_data *file)
 	else if (S_ISREG(file->st.st_mode) && ((file->st.st_mode & S_IXUSR) ||
 		(file->st.st_mode & S_IXGRP) || (file->st.st_mode & S_IXOTH)))
 		ft_printfcolor("%s\n", file->file, 31);
+	else if (S_ISLNK(file->st.st_mode))
+		ft_printfcolor("%s", file->file, 35);
 	else
 		ft_miniprintf("%s\n", file->file);
 }
@@ -105,7 +108,7 @@ void		print_ls(t_ls *ls, char *path, int i)
 	arr = get_dir_info(arr, path, ls);
 	if (!arr)
 		return ;
-	file = ft_memalloc(sizeof(t_data*) * 4096);
+	file = ft_memalloc(sizeof(void*) * 500);
 	get_stat(ls, file, arr, path);
 	while (arr[++j])
 		ft_memdel((void**)&arr[j]);

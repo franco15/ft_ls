@@ -26,11 +26,12 @@ static void	returning_back(t_ls *ls, void **file, char *path, int i)
 			== 0 || ft_strcmp(((t_data*)file[i])->file, "..") == 0))
 		{
 			tmp = ft_strdup(ls->ptmp);
-			// ft_strdel(&((t_data*)file[i])->file);
+			ft_memdel((void**)&((t_data*)file[i])->file);
 			((t_data*)file[i])->file = tmp;
 			ft_miniprintf("\n%s\n", ls->ptmp);
 			print_ls(ls, ((t_data*)file[i])->file, -1);
-			//free tmp?
+			ft_memdel((void**)&tmp);
+			ft_memdel((void**)&ls->ptmp);
 		}
 	}
 }
@@ -51,10 +52,7 @@ void		print_print(t_ls *ls, t_data *file)
 		(file->st.st_mode & S_IXGRP) || (file->st.st_mode & S_IXOTH)))
 		ft_printfcolor("%s\n", file->file, 31);
 	else
-	{
-		printf("smn\n");
 		ft_miniprintf("%s\n", file->file);
-	}
 }
 
 static void	ls_print(t_ls *ls, void **file)
@@ -80,20 +78,21 @@ static void	ls_print(t_ls *ls, void **file)
 	}
 }
 
-// static void	file_del(void ***file)
-// {
-// 	int		i;
-// 	void	**tmp;
-//
-// 	i = -1;
-// 	tmp = **file;
-// 	while (tmp[++i])
-// 	{
-// 		ft_memdel((void**)&((t_data*)file[i])->file);
-// 		ft_memdel((void**)&((t_data*)file[i])->path);
-// 	}
-// 	ft_memdel(tmp);
-// }
+static void	file_del(void **file)
+{
+	int		i;
+
+	i = -1;
+	while (file[++i])
+	{
+		if (((t_data*)file[i])->path)
+			ft_memdel((void**)&((t_data*)file[i])->path);
+		free(file[i]);
+		file[i] = 0;
+	}
+	free(file);
+	file = 0;
+}
 
 void		print_ls(t_ls *ls, char *path, int i)
 {
@@ -115,5 +114,5 @@ void		print_ls(t_ls *ls, char *path, int i)
 	ls_print(ls, file);
 	if (ls->o && ls->opts.rr && !ls->opts.d)
 		returning_back(ls, file, path, i);
-	// file_del(&file);
+	file_del(file);
 }

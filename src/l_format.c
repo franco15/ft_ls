@@ -50,7 +50,6 @@ static void	print_time(t_ls *ls, t_data *file, int i)
 	}
 	else
 		print_time_2(ls, file);
-	//del t o no?
 }
 
 static void	print_size(t_data *file)
@@ -70,8 +69,8 @@ static void	print_size(t_data *file)
 		tmp[i] = ' ';
 	ft_strcat(&tmp[i], size);
 	ft_miniprintf("%s ", tmp);
-	// ft_memdel((void*)&tmp);
-	// ft_memdel((void*)&size);
+	ft_memdel((void**)&tmp);
+	ft_memdel((void**)&size);
 }
 
 static void	print_permisions(t_data *file)

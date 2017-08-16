@@ -38,12 +38,12 @@ char		**get_dir_info(char **arr, char *path, t_ls *ls)
 	}
 	i = count_files(path);
 	arr = (char**)ft_memalloc((sizeof(char*) * i) + 1);
-	// arr[i] = 0;
 	i = 0;
 	while ((sd = readdir(dir)) != NULL)
 	{
 		if ((ls->o && ((!ls->opts.a && !ls->opts.d && !ls->opts.f) &&
-	!ls->opts.aa) && sd->d_name[0] == '.') || (!ls->o && sd->d_name[0] == '.'))
+				!ls->opts.aa) && sd->d_name[0] == '.')
+					|| (!ls->o && sd->d_name[0] == '.'))
 			continue ;
 		if (ls->o && ls->opts.aa && !ls->opts.a &&
 			(!ft_strcmp(sd->d_name, ".") || !ft_strcmp(sd->d_name, "..")))

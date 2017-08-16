@@ -31,7 +31,6 @@ static void	returning_back(t_ls *ls, void **file, char *path, int i)
 			ft_miniprintf("\n%s\n", ls->ptmp);
 			print_ls(ls, ((t_data*)file[i])->file, -1);
 			ft_memdel((void**)&tmp);
-			ft_memdel((void**)&ls->ptmp);
 		}
 	}
 }

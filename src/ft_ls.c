@@ -45,7 +45,7 @@ static void	ls_del(t_ls **ls)
 	tmp = *ls;
 	tmp->o = 0;
 	tmp->blocks = 0;
-	ft_memdel((void**)&tmp->ptmp);
+	// ft_memdel((void**)&tmp->ptmp);
 	ls_del_opts(tmp);
 	ft_memdel((void**)&tmp);
 }

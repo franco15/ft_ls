@@ -8,7 +8,7 @@ OBJ = $(SRC:.c=.o)
 all: $(NAME)
 
 $(NAME):
-	@gcc -c -Wall -Werror -Wextra $(SRC)
+	@gcc -c -Wall -Werror -Wextra -g $(SRC)
 	@ar rc $(NAME) $(OBJ)
 	@echo "minilibft compiled"
 

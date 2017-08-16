@@ -30,11 +30,11 @@ void	ft_putarr(char **s)
 
 	i = 0;
 	while (s[i])
-		ft_miniprintf("%s ", s[i++]);
-	ft_miniprintf("\n");
+		ft_printf("%s ", s[i++]);
+	ft_printf("\n");
 }
 
-size_t		ft_arrlen(void **s)
+size_t	ft_arrlen(void **s)
 {
 	int	i;
 

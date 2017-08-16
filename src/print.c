@@ -14,7 +14,6 @@
 
 static void	returning_back(t_ls *ls, void **file, char *path, int i)
 {
-	// char		*tmp;
 	struct stat	st;
 
 	while (file[++i])
@@ -25,12 +24,8 @@ static void	returning_back(t_ls *ls, void **file, char *path, int i)
 		if (S_ISDIR(st.st_mode) && !(ft_strcmp(((t_data*)file[i])->file, ".")
 			== 0 || ft_strcmp(((t_data*)file[i])->file, "..") == 0))
 		{
-			// tmp = ft_strdup(ls->ptmp);
-			// ft_memdel((void**)&((t_data*)file[i])->file);
-			// ((t_data*)file[i])->file = tmp;
-			ft_miniprintf("\n%s\n", ls->ptmp);
+			ft_printf("\n%s\n", ls->ptmp);
 			print_ls(ls, ls->ptmp, -1);
-			// ft_memdel((void**)&tmp);
 			ft_memdel((void**)&ls->ptmp);
 		}
 	}
@@ -54,7 +49,7 @@ void		print_print(t_ls *ls, t_data *file)
 	else if (S_ISLNK(file->st.st_mode))
 		ft_printfcolor("%s", file->file, 35);
 	else
-		ft_miniprintf("%s\n", file->file);
+		ft_printf("%s\n", file->file);
 }
 
 static void	ls_print(t_ls *ls, void **file)
@@ -80,23 +75,6 @@ static void	ls_print(t_ls *ls, void **file)
 	}
 }
 
-// static void	file_del(void **file)
-// {
-// 	int		i;
-// 	// void	**tmp;
-//
-// 	i = -1;
-// 	// tmp = file;
-// 	while (file[++i])
-// 	{
-// 		// if (((t_data*)file[i])->file)
-// 			// ft_memdel((void**)&((t_data*)file[i])->file);
-// 		if (((t_data*)file[i])->path)
-// 			ft_memdel((void**)&((t_data*)file[i])->path);
-// 	}
-// 	ft_memdel(file);
-// }
-
 void		print_ls(t_ls *ls, char *path, int i)
 {
 	int		j;
@@ -117,5 +95,4 @@ void		print_ls(t_ls *ls, char *path, int i)
 	ls_print(ls, file);
 	if (ls->o && ls->opts.rr && !ls->opts.d)
 		returning_back(ls, file, path, i);
-	// file_del(file);
 }

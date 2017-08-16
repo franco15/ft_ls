@@ -27,63 +27,63 @@ typedef struct		s_list
 /*
 ** array.c
 */
-void	ft_arrrev(void **s);
-void	ft_putarr(char **s);
-size_t	ft_arrlen(void **s);
+void				ft_arrrev(void **s);
+void				ft_putarr(char **s);
+size_t				ft_arrlen(void **s);
 
 /*
 ** conv.c
 */
-char	*ft_itoa_base(long long int n, int b);
+char				*ft_itoa_base(long long int n, int b);
 
 /*
 ** ft_printf.c
 */
-void	ft_miniprintf(const char *format, ...);
-void	ft_printfcolor(const char *format, ...);
+void				ft_printf(const char *format, ...);
+void				ft_printfcolor(const char *format, ...);
 
 /*
 ** ft_quicksort.c
 */
-void	ft_quicksort(void **s, int start, int end,
-		int (*comp)(void *, void *));
-void	ft_swap(void **s, int i, int j);
+void				ft_quicksort(void **s, int start, int end,
+					int (*comp)(void *, void *));
+void				ft_swap(void **s, int i, int j);
 
 /*
 ** mem.c
 */
-void	*ft_memalloc(size_t size);
-void	ft_memdel(void **ap);
-void	ft_bzero(void *s, size_t n);
-void	*ft_memset(void *b, int c, size_t len);
-void	*ft_realloc(void **ptr, size_t size, size_t newsize);
+void				*ft_memalloc(size_t size);
+void				ft_memdel(void **ap);
+void				ft_bzero(void *s, size_t n);
+void				*ft_memset(void *b, int c, size_t len);
+void				*ft_realloc(void **ptr, size_t size, size_t newsize);
 
 /*
 ** mem2.c
 */
-void	*ft_memcpy(void *dst, const void *src, size_t n);
+void				*ft_memcpy(void *dst, const void *src, size_t n);
 
 /*
 ** put.c
 */
-void	ft_putnbr(int nb);
-size_t	ft_putchar(char c);
-size_t	ft_putstr(char const *s);
+void				ft_putnbr(int nb);
+size_t				ft_putchar(char c);
+size_t				ft_putstr(char const *s);
 
 /*
 ** strings.c
 */
-int		ft_strcmp(const char *s1, const char *s2);
-char	*ft_strnew(size_t size);
-char	*ft_strdup(const char *s1);
-char	*ft_strcpy(char *dst, const	char *src);
-size_t	ft_strlen(const char *s);
+int					ft_strcmp(const char *s1, const char *s2);
+char				*ft_strnew(size_t size);
+char				*ft_strdup(const char *s1);
+char				*ft_strcpy(char *dst, const	char *src);
+size_t				ft_strlen(const char *s);
 
 /*
 ** string2.c
 */
-char	*ft_strjoin(char const *s1, char const *s2);
-char	*ft_strcat(char *s1, const char *s2);
-void	ft_strdel(char **as);
+char				*ft_strjoin(char const *s1, char const *s2);
+char				*ft_strcat(char *s1, const char *s2);
+void				ft_strdel(char **as);
 
 #endif

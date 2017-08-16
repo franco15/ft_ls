@@ -50,7 +50,7 @@ int		is_there_a_dir_or_file_in_av(char **av)
 
 	i = 1;
 	while (av[i] && av[i] && (av[i][0] == '-'))
-			i++;
+		i++;
 	if (av[i] && av[i][0] != '-')
 		return (i);
 	return (0);
@@ -68,6 +68,6 @@ void	print_blocks(long long blocks)
 	char	*tmp;
 
 	tmp = ft_itoa_base(blocks, 10);
-	ft_miniprintf("total %s\n", tmp);
+	ft_printf("total %s\n", tmp);
 	ft_memdel((void**)&tmp);
 }

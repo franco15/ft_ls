@@ -44,7 +44,8 @@ void			ft_printfcolor(const char *format, ...)
 				putcstr(va_arg(p, char*), va_arg(p, size_t));
 			else if ((*(format + 1)) == 'd')
 			{
-				putcstr(tmp = ft_itoa_base(va_arg(p, int), 10), va_arg(p, size_t));
+				putcstr(tmp = ft_itoa_base(va_arg(p, int), 10),
+				va_arg(p, size_t));
 				ft_memdel((void**)&tmp);
 			}
 			format += 1;
@@ -56,7 +57,7 @@ void			ft_printfcolor(const char *format, ...)
 	va_end(p);
 }
 
-void			ft_miniprintf(const char *format, ...)
+void			ft_printf(const char *format, ...)
 {
 	va_list p;
 	char	*str;

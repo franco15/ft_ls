@@ -23,10 +23,10 @@ static void	print_time_2(t_ls *ls, t_data *file)
 	dif = epoch - file->t2.tv_sec;
 	t = ctime(&file->t2.tv_sec);
 	if (dif > 15780000)
-		ft_miniprintf("%c%c%c %c%c  %c%c%c%c ", t[4], t[5], t[6], t[8], t[9],
+		ft_printf("%c%c%c %c%c  %c%c%c%c ", t[4], t[5], t[6], t[8], t[9],
 		t[20], t[21], t[22], t[23]);
 	else
-		ft_miniprintf("%c%c%c %c%c %c%c%c%c%c ", t[4], t[5], t[6], t[8], t[9],
+		ft_printf("%c%c%c %c%c %c%c%c%c%c ", t[4], t[5], t[6], t[8], t[9],
 		t[11], t[12], t[13], t[14], t[15]);
 }
 
@@ -42,10 +42,10 @@ static void	print_time(t_ls *ls, t_data *file, int i)
 		dif = epoch - file->st.st_mtime;
 		t = ctime(&file->st.st_mtime);
 		if (dif > 15780000)
-			ft_miniprintf("%c%c%c %c%c  %c%c%c%c ", t[4], t[5], t[6], t[8],
+			ft_printf("%c%c%c %c%c  %c%c%c%c ", t[4], t[5], t[6], t[8],
 			t[9], t[20], t[21], t[22], t[23]);
 		else
-			ft_miniprintf("%c%c%c %c%c %c%c%c%c%c ", t[4], t[5], t[6], t[8],
+			ft_printf("%c%c%c %c%c %c%c%c%c%c ", t[4], t[5], t[6], t[8],
 			t[9], t[11], t[12], t[13], t[14], t[15]);
 	}
 	else
@@ -68,7 +68,7 @@ static void	print_size(t_data *file)
 	while (j >= ++i)
 		tmp[i] = ' ';
 	ft_strcat(&tmp[i], size);
-	ft_miniprintf("%s ", tmp);
+	ft_printf("%s ", tmp);
 	ft_memdel((void**)&tmp);
 	ft_memdel((void**)&size);
 }
@@ -76,18 +76,18 @@ static void	print_size(t_data *file)
 static void	print_permisions(t_data *file)
 {
 	if (S_ISLNK(file->st.st_mode))
-		ft_miniprintf("l");
+		ft_printf("l");
 	else
-		ft_miniprintf((S_ISDIR(file->st.st_mode)) ? "d" : "-");
-	ft_miniprintf((file->st.st_mode & S_IRUSR) ? "r" : "-");
-	ft_miniprintf((file->st.st_mode & S_IWUSR) ? "w" : "-");
-	ft_miniprintf((file->st.st_mode & S_IXUSR) ? "x" : "-");
-	ft_miniprintf((file->st.st_mode & S_IRGRP) ? "r" : "-");
-	ft_miniprintf((file->st.st_mode & S_IWGRP) ? "w" : "-");
-	ft_miniprintf((file->st.st_mode & S_IXGRP) ? "x" : "-");
-	ft_miniprintf((file->st.st_mode & S_IROTH) ? "r" : "-");
-	ft_miniprintf((file->st.st_mode & S_IWOTH) ? "w" : "-");
-	ft_miniprintf((file->st.st_mode & S_IXOTH) ? "x" : "-");
+		ft_printf((S_ISDIR(file->st.st_mode)) ? "d" : "-");
+	ft_printf((file->st.st_mode & S_IRUSR) ? "r" : "-");
+	ft_printf((file->st.st_mode & S_IWUSR) ? "w" : "-");
+	ft_printf((file->st.st_mode & S_IXUSR) ? "x" : "-");
+	ft_printf((file->st.st_mode & S_IRGRP) ? "r" : "-");
+	ft_printf((file->st.st_mode & S_IWGRP) ? "w" : "-");
+	ft_printf((file->st.st_mode & S_IXGRP) ? "x" : "-");
+	ft_printf((file->st.st_mode & S_IROTH) ? "r" : "-");
+	ft_printf((file->st.st_mode & S_IWOTH) ? "w" : "-");
+	ft_printf((file->st.st_mode & S_IXOTH) ? "x" : "-");
 }
 
 void		l_format(t_ls *ls, t_data *file)
@@ -98,16 +98,14 @@ void		l_format(t_ls *ls, t_data *file)
 	p = getpwuid(file->st.st_uid);
 	g = getgrgid(file->st.st_gid);
 	print_permisions(file);
-	ft_miniprintf(listxattr(file->path, 0, 0, XATTR_NOFOLLOW) > 0 ? "@ " :
-							"  ");
-	ft_miniprintf("%d ", file->st.st_nlink);
+	ft_printf(listxattr(file->path, 0, 0, XATTR_NOFOLLOW) > 0 ? "@ " : "  ");
+	ft_printf("%d ", file->st.st_nlink);
 	if (!ls->opts.g)
-		ft_miniprintf("%s ", p->pw_name);
-	ft_miniprintf("%s ", g->gr_name);
+		ft_printf("%s ", p->pw_name);
+	ft_printf("%s ", g->gr_name);
 	print_size(file);
 	time_opts(ls) == 0 ? print_time(ls, file, 0) : print_time(ls, file, 1);
 	print_print(ls, file);
 	if (S_ISLNK(file->st.st_mode))
 		print_link(file->path);
-	ft_miniprintf("\n");
 }

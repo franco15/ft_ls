@@ -24,7 +24,6 @@ void		time_get(t_ls *ls, t_data *file)
 		file->t2 = file->st.st_mtimespec;
 }
 
-
 char		**get_dir_info(char **arr, char *path, t_ls *ls)
 {
 	int				i;
@@ -33,7 +32,7 @@ char		**get_dir_info(char **arr, char *path, t_ls *ls)
 
 	if (!(dir = opendir(path)))
 	{
-		ft_miniprintf("ls: %s: %s\n", path, strerror(errno));
+		ft_printf("ls: %s: %s\n", path, strerror(errno));
 		return (0);
 	}
 	i = count_files(path);

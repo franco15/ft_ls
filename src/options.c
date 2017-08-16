@@ -14,8 +14,8 @@
 
 static void	ft_usage(char option)
 {
-	ft_miniprintf("ls: illegal option -- %c\n", option);
-	ft_miniprintf("usage: ls [-ARUacdfglrtu] [file ...]\n");
+	ft_printf("ls: illegal option -- %c\n", option);
+	ft_printf("usage: ls [-ARUacdfglrtu] [file ...]\n");
 	exit(1);
 }
 
@@ -69,7 +69,7 @@ void		get_opts(t_ls *ls, char **s)
 	while (s[++i] && s[i][0] == '-')
 	{
 		if (!ft_strcmp("-", s[i]))
-			ft_miniprintf("ls: -: No such file or directory\n");
+			ft_printf("ls: -: No such file or directory\n");
 		j = 0;
 		ls->o = 1;
 		while (s[i][++j] && valid_opt(&s[i][j]))

@@ -108,7 +108,7 @@ void		print_ls(t_ls *ls, char *path, int i)
 	arr = get_dir_info(arr, path, ls);
 	if (!arr)
 		return ;
-	file = ft_memalloc(sizeof(void*) * 500);
+	file = ft_memalloc(sizeof(void*) * 4096);
 	get_stat(ls, file, arr, path);
 	while (arr[++j])
 		ft_memdel((void**)&arr[j]);

@@ -14,7 +14,7 @@
 
 static void	returning_back(t_ls *ls, void **file, char *path, int i)
 {
-	char		*tmp;
+	// char		*tmp;
 	struct stat	st;
 
 	while (file[++i])
@@ -25,12 +25,12 @@ static void	returning_back(t_ls *ls, void **file, char *path, int i)
 		if (S_ISDIR(st.st_mode) && !(ft_strcmp(((t_data*)file[i])->file, ".")
 			== 0 || ft_strcmp(((t_data*)file[i])->file, "..") == 0))
 		{
-			tmp = ft_strdup(ls->ptmp);
-			ft_memdel((void**)&((t_data*)file[i])->file);
-			((t_data*)file[i])->file = tmp;
+			// tmp = ft_strdup(ls->ptmp);
+			// ft_memdel((void**)&((t_data*)file[i])->file);
+			// ((t_data*)file[i])->file = tmp;
 			ft_miniprintf("\n%s\n", ls->ptmp);
-			print_ls(ls, ((t_data*)file[i])->file, -1);
-			ft_memdel((void**)&tmp);
+			print_ls(ls, ls->ptmp, -1);
+			// ft_memdel((void**)&tmp);
 			ft_memdel((void**)&ls->ptmp);
 		}
 	}
